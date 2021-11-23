@@ -1,0 +1,84 @@
+default_platform(:ios)
+
+platform :ios do
+
+  scheme = ENV['Scheme']
+  directory = File.expand_path("..", Dir.pwd) + File::Separator + 'build'
+  appId = ENV['App_Identifier']
+
+
+  
+  lane :adhoc do
+    
+    prepare
+    
+    gym(
+      clean: true,
+      silent: true,
+      scheme: scheme,
+      export_method: 'ad-hoc',
+      output_directory: directory,
+      skip_profile_detection: true,
+      export_options: {
+        provisioningProfiles: { 
+          appId => 'Alpha_Pro',
+          "#{appId}.ne" => 'Alpha_NE_Pro'
+        }
+      }
+      
+    )
+
+    upload
+    
+    
+  end
+
+  lane :prepare do 
+
+    version = get_version_number_from_xcodeproj(target: scheme)
+    build = get_build_number_from_xcodeproj(target: scheme)
+
+
+    UI.important "#{scheme} 当前版本：#{version} (#{build})"
+    
+
+    res = UI.input("输入新版本：")
+
+    if res == ''
+
+      build = increment_build_number_in_xcodeproj
+
+    else 
+
+      until UI.confirm("确认新版本：#{res}?") 
+        res = UI.input("重新输入新版本：")
+      end
+
+      version = increment_version_number_in_xcodeproj(version_number: res)
+      build = increment_build_number_in_xcodeproj(build_number: '1')
+
+    end
+
+    UI.important "#{scheme} 更新版本：#{version} (#{build})"
+   
+  end
+
+
+  lane :upload do 
+
+    command = "fir p #{directory}/#{scheme}.ipa -T #{ENV['Firm_Token']} --changelog=./changelog"    
+    sh(command)
+   
+  end
+
+
+
+  after_all do |lane|
+    
+  end
+
+  error do |lane, exception|
+
+  end
+
+end
