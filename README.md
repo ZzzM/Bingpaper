@@ -1,11 +1,11 @@
 # Bingpaper
 
-一个使用 SwiftUI 开发的 Bing 壁纸 App
+一个实用的 iOS Bing 壁纸 App
 
 - [x] 小组件
 - [x] 主题切换 
 - [x] 配色（App、小组件）同步
-- [x] Async / Await
+- [x] SwiftUI / Async / Await
 
 ### 兼容性
 设备需装有 **iOS 15** 或更高版本
