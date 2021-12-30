@@ -1,0 +1,102 @@
+default_platform(:ios)
+
+def delete_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+end
+
+def create_temp_keychain(name, password)
+  create_keychain(
+    name: name,
+    password: password,
+    unlock: false,
+    timeout: 3600
+  )
+end
+
+def ensure_temp_keychain(name, password)
+  delete_temp_keychain(name)
+  create_temp_keychain(name, password)
+end
+
+platform :ios do
+
+
+  APP_SCHEME = ENV["APP_SCHEME"]
+  CERTIFICATE_PASSWORD = ENV["CERTIFICATE_PASSWORD"]
+
+  lane :setup do |options|
+
+    keychain_name = "#{APP_SCHEME}-signing"
+    keychain_password = "password"
+
+    cert_path = options[:cert_path]
+    pp_path = options[:pp_path]
+
+    ensure_temp_keychain(keychain_name, keychain_password)
+    install_provisioning_profile(path: pp_path)
+    import_certificate(
+      certificate_path: cert_path,
+      certificate_password: CERTIFICATE_PASSWORD,
+      keychain_name: keychain_name,
+      keychain_password: keychain_password
+    )
+
+  end
+
+
+  lane :increment do 
+
+    version = get_version_number_from_xcodeproj(target: APP_SCHEME)
+    build = get_build_number_from_xcodeproj(target: APP_SCHEME)
+
+
+    UI.important "#{APP_SCHEME} 当前版本：#{version} (#{build})"
+    
+
+    res = UI.input("输入新版本：")
+
+    if res == ''
+
+      build = increment_build_number_in_xcodeproj
+
+    else 
+
+      until UI.confirm("确认新版本：#{res}?") 
+        res = UI.input("重新输入新版本：")
+      end
+
+      version = increment_version_number_in_xcodeproj(version_number: res)
+      build = increment_build_number_in_xcodeproj(build_number: '1')
+
+    end
+
+    UI.important "#{APP_SCHEME} 更新版本：#{version} (#{build})"
+   
+  end
+
+  lane :build do
+    build_app(
+      clean: true,
+      silent: true,
+      scheme: APP_SCHEME,
+      export_method: 'ad-hoc'
+    )
+  end
+
+  
+  lane :package do
+    
+    build
+    clean
+    fir_cli
+    
+  end
+
+  lane :clean do
+    sh "rm -vfr ~/Library/Developer/Xcode/Archives/*"
+  end
+
+
+end
