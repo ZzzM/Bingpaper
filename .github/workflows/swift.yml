@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - 1.*
+      
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    runs-on: macOS-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Install
+        run: |
+          CERTIFICATE_PATH=$RUNNER_TEMP/$APP_SCHEME.p12
+          PP_PATH=$RUNNER_TEMP/$APP_SCHEME.mobileprovision
+          PP_NE_PATH=$RUNNER_TEMP/${APP_SCHEME}_NE.mobileprovision
+
+          echo -n "$CERTIFICATE_DATA" | base64 --decode --output $CERTIFICATE_PATH
+          echo -n "$ALPHA_PROFILE_DATA" | base64 --decode --output $PP_PATH
+          echo -n "$ALPHA_NE_PROFILE_DATA" | base64 --decode --output $PP_NE_PATH
+
+          fastlane setup cert_path:$CERTIFICATE_PATH pp_path:$PP_PATH pp_ne_path:$PP_NE_PATH
+          
+      - name: Setup
+        run: |
+          fastlane run set_info_plist_value path:$APP_SCHEME/Info.plist key:FIR_CLI_API_TOKEN value:$FIR_CLI_API_TOKEN
+          fastlane run increment_build_number build_number:${GITHUB_SHA::7}
+          
+      - name: Package
+        run: |
+          fastlane package
+env:
+  APP_SCHEME: ${{ secrets.APP_SCHEME }}
+  CERTIFICATE_DATA: ${{ secrets.CERTIFICATE_DATA }}
+  CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+  ALPHA_PROFILE_DATA: ${{ secrets.ALPHA_PROFILE_DATA }}
+  ALPHA_NE_PROFILE_DATA: ${{ secrets.ALPHA_NE_PROFILE_DATA }}
+  FIR_CLI_API_TOKEN: ${{ secrets.FIR_CLI_API_TOKEN }}
+  FIR_APP_CHANGELOG: changelog
