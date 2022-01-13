@@ -1,14 +1,15 @@
 # Bingpaper
 
-A practical iOS Bing wallpaper app 
+A practical iOS Bing wallpaper App 
 
+## Features
 - [x] Widgets
 - [x] Switch to Dark & Light Modes Manually
 - [x] App and widget color matching synchronization
 - [x] SwiftUI / Async / Await
 
 ## Compatibility
-Requires **iOS 15.0** or later.
+Requires **iOS 15.0** or later
 
 
 ## Version History
