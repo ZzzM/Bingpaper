@@ -1,4 +1,15 @@
-# Bingpaper
+<h1>
+Bingpaper</br>
+<a href="https://github.com/ZzzM/Bingpaper/tags">
+  <img src="https://img.shields.io/github/v/tag/ZzzM/Bingpaper">
+</a>
+<a href="https://raw.githubusercontent.com/ZzzM/Bingpaper/master/LICENSE">
+  <img src="https://img.shields.io/github/license/ZzzM/Bingpaper">
+</a>
+<a href="https://zzzm.github.io/2022/01/17/bingpaper/">
+  <img src="https://img.shields.io/badge/docs-%E4%B8%AD%E6%96%87-red">
+</a>
+</h1>
 
 A practical iOS Bing wallpaper App 
 
