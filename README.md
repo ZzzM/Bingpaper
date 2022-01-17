@@ -40,4 +40,4 @@ Requires **iOS 15.0** or later
 
 ## Libraries
 
-- [*Kingfisher*](https://github.com/onevcat/Kingfisher)
+- [Kingfisher](https://github.com/onevcat/Kingfisher)
