@@ -13,6 +13,7 @@ Bingpaper</br>
 
 A practical iOS Bing wallpaper app 
 
+## Features
 - [x] Widgets
 - [x] Switch to Dark & Light Modes Manually
 - [x] App and widget color matching synchronization
