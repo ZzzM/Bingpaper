@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 extension Date {
 
     private var calendar: Calendar {
-        Calendar.defatult
+        Calendar.current
     }
 
     var inToday: Bool {
@@ -25,11 +26,6 @@ extension Date {
         calendar.component(.month, from: self)
     }
 
-    var monthName: String {
-        let dateFormatter = DateFormatter.default
-        dateFormatter.dateFormat = "MMMM"
-        return dateFormatter.string(from: self)
-    }
 
     var day: Int {
         calendar.component(.day, from: self)
@@ -42,13 +38,6 @@ extension Date {
     var weekday: Int {
         calendar.component(.weekday, from: self)
     }
-    
-    var weekdayName: String {
-        let dateFormatter = DateFormatter.default
-        dateFormatter.dateFormat = "EEE"
-        return dateFormatter.string(from: self)
-    }
-
 
     var startOfMonth: Date {
         let dateComponents = calendar.dateComponents([.year, .month], from: self)
@@ -86,6 +75,7 @@ extension String {
     var urlDecoded: String {
         removingPercentEncoding ?? ""
     }
+
 }
 
 extension URLComponents {
@@ -102,4 +92,26 @@ extension URLComponents {
         return _parameters
     }
 
+}
+
+extension DateFormatter {
+    static var weekday: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        return dateFormatter
+    }
+    static var month: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        return dateFormatter
+    }
+  
+}
+
+@available(iOSApplicationExtension, unavailable)
+extension URL {
+    func open() {
+        guard UIApplication.shared.canOpenURL(self) else { return }
+        UIApplication.shared.open(self, options:[:], completionHandler: .none)
+    }
 }

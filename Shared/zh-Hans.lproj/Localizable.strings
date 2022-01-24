@@ -1,0 +1,50 @@
+/* 
+  File.strings
+  Bingpaper
+
+  Created by zm on 2022/1/18.
+  
+*/
+
+"widget.displayName" = "Bing 壁纸日历";
+"widget.description" = "一个实用的 iOS Bing 壁纸 App";
+
+"settings.title" = "设置";
+"settings.general" = "通用";
+"settings.other" = "其他";
+"settings.theme" = "主题";
+"settings.palette" = "调色";
+"settings.language" = "语言";
+"settings.permission" = "权限";
+"settings.cache" = "数据缓存";
+"settings.about" = "关于 Bingpaper";
+"settings.changelog" = "版本记录";
+
+"theme.system" = "跟随系统";
+"theme.dark" = "深色";
+"theme.light" = "浅色";
+
+"language.system" = "跟随系统";
+"language.chinese" = "简体中文";
+"language.english" = "English";
+
+"permission.addPhotos" = "照片写入";
+
+"alert.ok" = "好的";
+"alert.cancel" = "取消";
+"alert.confirm.permission" = "确认修改权限?";
+"alert.request.permission" = "开启照片写入权限?";
+"alert.install" = "安装更新?";
+"alert.clear" = "清理缓存？";
+"alert.new" = "新!";
+
+"error.url" = "URL 错误";
+"error.http" = "Http 错误: ";
+"error.server" = "Server 错误: ";
+"error.reload" = "重新加载";
+"error.empty" = "暂无数据";
+
+"toast.refresh.completed" = "刷新完成";
+"toast.refresh.failed" = "刷新失败";
+"toast.album.completed" = "已保存至相册";
+"toast.album.failed" = "保存至相册失败";

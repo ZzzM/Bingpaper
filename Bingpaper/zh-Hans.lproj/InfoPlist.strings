@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Bingpaper
+
+  Created by zm on 2022/1/21.
+  
+*/
+"NSPhotoLibraryAddUsageDescription" = "保存下载的壁纸";

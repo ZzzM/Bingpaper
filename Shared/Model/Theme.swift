@@ -19,11 +19,11 @@ enum Theme: Int, CaseIterable {
         }
     }
 
-    var displayName: String {
+    var displayName: LocalizedStringKey {
         switch self {
-        case .light: return "浅色"
-        case .dark: return "深色"
-        default: return "跟随系统"
+        case .light: return L10n.Theme.light
+        case .dark: return L10n.Theme.dark
+        default: return L10n.Theme.system
         }
     }
 }

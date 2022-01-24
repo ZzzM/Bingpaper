@@ -9,7 +9,8 @@ import WidgetKit
 
 struct WidgetFetcher {
 
-    static func fetchPaper() async -> Timeline<Entry> {
+    
+    static func fetchPaper(mkt: String) async -> Timeline<Entry> {
 
         var entries: [Entry] = []
         var policy: TimelineReloadPolicy
@@ -18,7 +19,7 @@ struct WidgetFetcher {
         let date = Date()
 
         do {
-            let paper = try await Fetcher.fetchToday().get()
+            let paper = try await Fetcher.fetchToday(mkt: mkt).get()
             entry = try await Entry(paper: paper)
             policy = .after(date.startOfTomorrow)
         } catch  {

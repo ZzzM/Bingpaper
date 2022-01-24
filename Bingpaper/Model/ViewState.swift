@@ -4,16 +4,18 @@
 //
 //  Created by zm on 2021/10/26.
 //
+import SwiftUI
+
 enum ViewState: Equatable {
 
     case idle,
     onRefresh,
     refreshCompleted,
-    refreshError(String),
+    refreshError(LocalizedStringKey),
     onLoading,
     loadComplete,
     loadNoData,
-    loadError(String),
+    loadError(LocalizedStringKey),
     empty
 
 

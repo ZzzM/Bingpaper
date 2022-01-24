@@ -6,6 +6,9 @@ struct MainView: View {
     @StateObject
     private  var viewModel = MainViewModel()
 
+    @EnvironmentObject
+    private var pref: Preference
+
     var body: some View {
 
         NavigationView {
@@ -13,17 +16,7 @@ struct MainView: View {
                 .navigationBarTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Text("\(viewModel.date.month) ").fontWith(.largeTitle) +
-                        Text("/ ").fontWith(.title) +
-                        Text("\(viewModel.date.day)").fontWith(.title3)
-
-                    }
-                    ToolbarItem(placement: .primaryAction) {
-                        NavigationLink(destination: SettingsView.init) {
-                            Image.settings
-                        }
-                    }
+                    toolbarContent
                 }
         }
         .fullScreenCover(item: $viewModel.paper) {
@@ -39,30 +32,42 @@ struct MainView: View {
         .onAppear {
             viewModel.load()
         }
+        .onChange(of: pref.language) { _ in
+            viewModel.refresh()
+        }
+        .toast(isPresenting: $viewModel.showToast, toast: viewModel.toast)
+
         
     }
 
 }
 
 extension MainView {
+
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .cancellationAction) {
+            Text("\(viewModel.date.month) ").fontWith(.largeTitle) +
+            Text("/ ").fontWith(.title) +
+            Text("\(viewModel.date.day)").fontWith(.title3)
+        }
+        ToolbarItem(placement: .primaryAction) {
+            NavigationLink(destination: SettingsView.init) {
+                Image.settings
+            }
+        }
+    }
+
     private var content: some View {
-
         ZStack {
-
             if viewModel.isFinished {
                 scrollView
             }
-
             if case .onLoading = viewModel.state {
                 scrollViewPlaceholder
-            } else if case let .loadError(message) = viewModel.state {
+            } else if case  .loadError(let message) = viewModel.state {
                 RetryView(message) { viewModel.load() }
-            } else if case let .refreshError(message) = viewModel.state {
-                hintView(.failure(message))
-            } else if case .refreshCompleted = viewModel.state {
-                hintView(.success("更新完成"))
             }
-
         }
     }
 
@@ -99,17 +104,5 @@ extension MainView {
 
     }
     
-}
-
-
-extension MainView {
-
-    private func hintView(_ type: HintType) -> some View {
-        VStack {
-            HintView(type: type)
-            Spacer()
-        }
-    }
-
 }
 

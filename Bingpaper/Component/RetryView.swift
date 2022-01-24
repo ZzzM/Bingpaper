@@ -9,10 +9,10 @@ import SwiftUI
 
 struct RetryView: View {
 
-    let message: String,
+    let message: LocalizedStringKey,
         action: VoidClosure?
 
-    init(_ message: String, action: VoidClosure? = .none) {
+    init(_ message: LocalizedStringKey, action: VoidClosure? = .none) {
         self.message = message
         self.action = action
     }
@@ -26,7 +26,7 @@ struct RetryView: View {
 
             if action != nil {
                 Button(action: action!) {
-                    Text("重新加载")
+                    Text(L10n.Error.reload)
                         .frame(width: 120, height: 40, alignment: .center)
                         .background(.tint)
                         .cornerRadius(5)

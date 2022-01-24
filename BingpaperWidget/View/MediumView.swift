@@ -11,12 +11,6 @@ struct MediumView: View {
 
     let entry: Entry
 
-    private let days = WidgetFetcher.fetchDays()
-
-    private var offset: CGFloat {
-        days.count > 35 ? 3:5
-    }
-
     var body: some View {
         HStack(spacing: 0) {
             GeometryReader { p in
@@ -26,8 +20,8 @@ struct MediumView: View {
 
             VStack(alignment: .trailing, spacing: 0) {
                 Spacer()
-                MediumWeekdayView(offset: offset)
-                MediumDaysView(days: days, offset: offset)
+                MediumWeekdayView()
+                MediumDaysView()
                 Spacer()
             }
         }
@@ -40,26 +34,29 @@ struct MediumView: View {
 
 struct MediumWeekdayView: View {
 
-    @EnvironmentObject
-    private var pref: WidgetPreference
+    private let pref = Preference.shared
 
-    let  offset: CGFloat
+    private var weekdaySymbols: [String]  {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = pref.language.locale
+        return dateFormatter.veryShortWeekdaySymbols
+    }
 
     var body: some View {
 
-        Text(Date().monthName)
-            .foregroundColor(pref.tint)
-            .fontWith(.caption, weight: .medium)
+        Text(Date(), formatter: DateFormatter.month)
+            .foregroundColor(pref.palette.color)
+            .fontWith(.caption, weight: .regular)
         
-        LazyVGrid(columns: Array.weekdayColumns) {
-            ForEach(Array.weekdaySymbols, id: \.offset) {
+        LazyVGrid(columns: .weekdayColumns) {
+            ForEach(weekdaySymbols.enumerated() + [], id: \.offset) {
                 Text($0.1)
                     .fontWith(.caption2)
                     .foregroundColor($0.0 == 0 || $0.0 == 6 ? .secondary : .primary)
-
             }
         }
-        .padding(.vertical, offset)
+        .padding(.init(top: 8, leading: 0, bottom: 4, trailing: 0))
+
     }
 
 }
@@ -67,19 +64,22 @@ struct MediumWeekdayView: View {
 
 struct MediumDaysView: View {
 
-    @EnvironmentObject
-    private var pref: WidgetPreference
+    private let pref = Preference.shared
 
-    let days: [PaperDay] , offset: CGFloat
+    private let days = WidgetFetcher.fetchDays()
+
+    private var spacing: CGFloat {
+        days.count > 35 ? 2:4
+    }
 
     var body: some View {
 
-        LazyVGrid(columns: Array.weekdayColumns, spacing: offset - 1) {
+        LazyVGrid(columns: .weekdayColumns, spacing: spacing) {
             ForEach(days, id: \.title) { day in
                 ZStack {
                     if day.inToday {
                         Rectangle()
-                            .foregroundColor(pref.tint)
+                            .foregroundColor(pref.palette.color)
                             .frame(minWidth: 16, maxWidth: 18, minHeight: 16, maxHeight: 18)
                             .cornerRadius(3)
                     }

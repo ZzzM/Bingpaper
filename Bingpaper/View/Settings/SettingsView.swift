@@ -19,13 +19,15 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Group {
-                ColorSection()
+                GeneralSection()
                 PermissionSection()
-                Section("其他") {
+                Section(L10n.Settings.other) {
                     CacheRow(size: viewModel.cacheSize) { viewModel.cacheClear() }
-                    VersionRow(version: viewModel.version)
+                    ChangelogRow()
+                    AboutRow(version: viewModel.version)
                 }
             }
+            .textCase(.none)
             .listRowBackground(Color.cellBackground)
 
         }
@@ -33,42 +35,43 @@ struct SettingsView: View {
             viewModel.cacheCalculate()
             viewModel.checkForUpdate()
         })
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("设置")
-                    .fontWith(.title2)
-                    .foregroundColor(.accentColor)
-            }
-        }
+        .barTitle(L10n.Settings.title)
 
     }
 
 }
 
-struct ColorSection: View {
+
+struct GeneralSection: View {
 
     @EnvironmentObject
     private var pref: Preference
 
     var body: some View {
 
-        Section("色彩偏好") {
+        Section(L10n.Settings.general) {
 
-            Picker("主题", selection: pref.$theme) {
-                ForEach(Theme.allCases, id: \.self) {
-                    Text($0.displayName)
-                }
+            GeneralPicker(titleKey: L10n.Settings.language,
+                          items: Language.allCases,
+                          selection: $pref.language) {
+                Text($0.displayName)
             }
 
-            Picker("配色", selection: pref.$palette) {
-                ForEach(Palette.allCases, id: \.self) {
-                    Circle()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor($0.color)
-                }
+            GeneralPicker(titleKey: L10n.Settings.theme,
+                          items: Theme.allCases,
+                          selection: $pref.theme) {
+                Text($0.displayName)
             }
+
+            GeneralPicker(titleKey: L10n.Settings.palette,
+                          items: Palette.allCases,
+                          selection: $pref.palette) {
+                Circle()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor($0.color)
+
+            }
+
         }
 
     }
@@ -81,14 +84,14 @@ struct PermissionSection: View {
 
     var body: some View {
         if PhotoLibrary.isDeterminedForAddOnly {
-            Section("权限") {
-                Toggle("相册写入", isOn: .constant(PhotoLibrary.isAuthorizedForAddOnly))
-                    .toggleStyle(CheckboxStyle())
+            Section(L10n.Settings.permission) {
+                Toggle(L10n.Permission.addPhotos, isOn: .constant(PhotoLibrary.isAuthorizedForAddOnly))
+                    .toggleStyle(CheckboxStyle(active: false))
                     .onTapGesture {
                         isPresented.toggle()
                     }
             }
-            .open("修改相册写入权限？", isPresented: $isPresented)
+            .open(L10n.Alert.confirmPermission, isPresented: $isPresented)
         }
     }
 }
@@ -102,33 +105,41 @@ struct CacheRow: View {
     private var isPresented = false
 
     var body: some View {
-        SettingsRow(title: "清理缓存") {
+        SettingsRow(title: L10n.Settings.cache) {
             isPresented.toggle()
         } label: {
             Text(String(format: "%.2g M", size))
                 .foregroundColor(.secondary)
         }
         .disabled(size <= 0)
-        .showAlert("清除缓存？", isPresented: $isPresented, action: action)
+        .showAlert(L10n.Alert.clear, isPresented: $isPresented, action: action)
     }
 
 }
 
-struct VersionRow: View {
+struct ChangelogRow: View {
+    var body: some View {
+        NavigationLink.init(L10n.Settings.changelog, destination: ChangelogView.init)
+    }
 
-    let version: Version
+}
+
+struct AboutRow: View {
 
     @State
     private var isPresented = false
 
+    let version: Version
+
     var body: some View {
-        SettingsRow(title: "版本") {
+
+        SettingsRow(title: L10n.Settings.about) {
             isPresented.toggle()
         } label: {
             HStack {
-                Text("\(AppInfo.version.value)( \(AppInfo.build.value) )").foregroundColor(.secondary)
+                Text(AppInfo.displayVersion).foregroundColor(.secondary)
                 if !version.isLatest {
-                    Text("检测到更新")
+                    Text(L10n.Alert.new)
                         .font(.caption)
                         .padding(5)
                         .foregroundColor(.white)
@@ -138,7 +149,7 @@ struct VersionRow: View {
             }
         }
         .disabled(version.isLatest)
-        .open("下载更新？",
+        .open(L10n.Alert.install,
               message: version.changelog,
               urlString: version.installUrl,
               isPresented: $isPresented)
@@ -149,14 +160,19 @@ struct VersionRow: View {
 
 struct SettingsRow<Label: View>: View {
 
-    let title: String, action: VoidClosure, label: () -> Label
+    let title: LocalizedStringKey, action: VoidClosure
+
+    @ViewBuilder
+    let label: () -> Label
 
     var body: some View {
         Button(action: action) {
             HStack {
                 Text(title).foregroundColor(.primary)
-                Spacer()
-                label()
+                ZStack(alignment: .trailing) {
+                    label().padding(.horizontal)
+                    NavigationLink(destination: {}, label: {})
+                }
             }
         }
     }

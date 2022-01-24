@@ -11,15 +11,13 @@ import SwiftUI
 @main
 struct BingpaperWidget: Widget {
 
-    @StateObject
-    private var pref = WidgetPreference()
-
+    private let pref = Preference.shared
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: WidgetInfo.kind, provider: Provider()) { entry in
             WidgetContent(entry: entry)
-                .environmentObject(pref)
-                
+                .environment(\.locale, pref.language.locale)
+                .modifier(ColorSchemeModifier(colorScheme: pref.theme.colorScheme))
         }
         .supportedFamilies([.systemSmall, .systemMedium])
         .configurationDisplayName(WidgetInfo.displayName)
@@ -40,11 +38,14 @@ struct WidgetContent: View {
     }
 }
 
-class WidgetPreference: ObservableObject {
-    @AppStorage(AppStorageKey.palette, store: UserDefaults.default)
-    private var palette: Palette = .default
-
-    var tint: Color {
-        palette.color
+struct ColorSchemeModifier: ViewModifier {
+    let colorScheme: ColorScheme?
+    func body(content: Content) -> some View {
+        if let _colorScheme = colorScheme {
+            content.environment(\.colorScheme, _colorScheme)
+        } else {
+            content
+        }
     }
 }
+

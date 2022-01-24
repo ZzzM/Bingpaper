@@ -12,11 +12,9 @@ import WidgetKit
 struct BingpaperApp: App {
 
     @StateObject
-    private var pref = Preference()
-
+    private var pref = Preference.shared
 
     init() {
-        
         let bar = UINavigationBar.appearance()
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -28,21 +26,25 @@ struct BingpaperApp: App {
 
     }
 
+
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(pref)
                 .environment(\.font, .default)
+                .environment(\.locale, pref.language.locale)
                 .tint(pref.palette.color)
                 .accentColor(pref.palette.color)
-                .environmentObject(pref)
                 .preferredColorScheme(pref.theme.colorScheme)
                 .onChange(of: pref.palette, perform: reloadTimelines)
+                .onChange(of: pref.theme, perform: reloadTimelines)
+                .onChange(of: pref.language, perform: reloadTimelines)
                 .onOpenURL(perform: onOpenURL)
                 
         }
     }
 
-    func reloadTimelines(_ palette: Palette) {
+    func reloadTimelines<V: Equatable>(_ newValue: V) {
         WidgetCenter.shared.reloadAllTimelines()
     }
 

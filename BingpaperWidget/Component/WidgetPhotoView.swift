@@ -21,7 +21,7 @@ struct WidgetPhotoView: View {
                 PhotoPlaceholder(size: 30, width: width, height: height)
             }
         }
-        .cornerRadius(10)
+        .cornerRadius(5)
 
     }
 }

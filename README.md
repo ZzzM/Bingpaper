@@ -5,19 +5,16 @@ A practical iOS Bing wallpaper app
 - [x] Widgets
 - [x] Switch to Dark & Light Modes Manually
 - [x] App and widget color matching synchronization
+- [x] App and widget localization (简体中文、English)
 - [x] SwiftUI / Async / Await
 
 ## Compatibility
 Requires **iOS 15.0** or later.
 
 
-## Version History
-
-|       |                  |            | 
-| ----- | ---------------- | :--------: |
-| 1.0.1 | Fix bugs   | 2021.12.30 |
-| 1.0.0 | -                | 2021.11.23 |
-
+## Changelogs
+- [简体中文](Bingpaper/Changelogs/CHANGELOG_SC.md)
+- [English](Bingpaper/Changelogs/CHANGELOG.md)
 
 
 ## Snapshots
@@ -28,4 +25,5 @@ Requires **iOS 15.0** or later.
 
 ## Libraries
 
-- [*Kingfisher*](https://github.com/onevcat/Kingfisher)
+- [Kingfisher](https://github.com/onevcat/Kingfisher)
+- [MarkdownUI](https://github.com/gonzalezreal/MarkdownUI)

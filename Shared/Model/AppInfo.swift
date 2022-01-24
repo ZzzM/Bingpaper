@@ -13,10 +13,13 @@ enum AppInfo: String {
     case firToken = "FIR_CLI_API_TOKEN",
          build = "CFBundleVersion",
          version = "CFBundleShortVersionString",
-         identifier = "CFBundleIdentifier"
+         identifier = "CFBundleIdentifier",
+         name = "CFBundleName"
 
     var value: String {
-        Bundle.main.infoDictionary?[rawValue] as? String ?? "Nil"
+        Bundle.main.infoDictionary?[rawValue] as? String ?? "none"
     }
 
+    static let displayVersion = "\(version.value) ( \(build.value) )"
+    static let displayName = name.value
 }

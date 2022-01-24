@@ -8,18 +8,18 @@
 import SwiftUI
 import Kingfisher
 
-struct PhotoView<T: View>: View {
+struct PhotoView<Content: View>: View {
 
     let urlString: String
     let width: CGFloat?, height: CGFloat?
 
     let onFailure: FailureClosure?
     let onSuccess: ((UIImage) -> Void)?
-    let onProgress: ((CGFloat) -> T)?
+    let onProgress: ((CGFloat) -> Content)?
     let onTapGesture: VoidClosure?
 
     init(_ urlString: String, width: CGFloat? = .none, height: CGFloat? = .none,
-         onProgress: ((CGFloat) -> T)? = .none,
+         onProgress: ((CGFloat) -> Content)? = .none,
          onFailure: FailureClosure? = .none,
          onSuccess: ((UIImage) -> Void)? = .none,
          onTapGesture: VoidClosure? = .none) {
@@ -33,15 +33,11 @@ struct PhotoView<T: View>: View {
         self.onTapGesture = onTapGesture
     }
 
-    @State
-    private var isFinished = false
-
     var body: some View {
         KFImage(URL(string: urlString))
             .resizable()
             .onFailure(onFailure)
             .onSuccess{ result in
-                isFinished.toggle()
                 onSuccess?(result.image)
             }
             .placeholder{
@@ -53,9 +49,7 @@ struct PhotoView<T: View>: View {
             .frame(width: width, height: height)
             .ignoresSafeArea()
             .onTapGesture {
-                if isFinished {
-                    onTapGesture?()
-                }
+                onTapGesture?()
             }
     }
 

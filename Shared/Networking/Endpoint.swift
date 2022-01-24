@@ -14,7 +14,7 @@ enum Host {
 }
 
 enum Endpoint {
-    case fetchPapers(String),
+    case fetchPapers(String, String),
          checkForUpdate
 }
 
@@ -38,8 +38,8 @@ extension Endpoint {
 
     private var parameters: [String: String] {
         switch self {
-        case .fetchPapers(let size):
-            return ["format": "js", "idx": "0", "n": size, "mkt": "zh-CN"]
+        case .fetchPapers(let size, let mkt):
+            return ["format": "js", "idx": "0", "n": size, "mkt": mkt]
         case .checkForUpdate:
             return ["api_token": AppInfo.firToken.value, "type": "ios"]
         }

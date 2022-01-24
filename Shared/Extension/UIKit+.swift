@@ -13,13 +13,3 @@ extension UIScreen {
 }
 
 
-extension UIScreen {
-    var isDark: Bool {
-        traitCollection.userInterfaceStyle == .dark
-    }
-
-    var colorScheme: ColorScheme {
-        isDark ? .dark:.light
-    }
-}
-

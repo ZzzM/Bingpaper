@@ -1,12 +1,21 @@
 import SwiftUI
 
+
+
 class MainViewModel: StateViewModel {
 
+    private let pref = Preference.shared
+    
     @Published
     var date = Date()
 
     @Published
     var paper: Paper?
+
+    @Published
+    var showToast = false
+
+    var toast = Toast.deafult
 
     var images: [Paper] = []
 
@@ -46,10 +55,10 @@ class MainViewModel: StateViewModel {
         Task {
             do {
                 state = .onLoading
-                images = try await Fetcher.fetchWeek().get()
-                state = isEmpty ? .loadError("暂无数据"):.loadComplete
+                images = try await Fetcher.fetchWeek(mkt: pref.language.mkt).get()
+                state = isEmpty ? .loadError(L10n.Error.empty):.loadComplete
             } catch {
-                state = .loadError(error.localizedDescription)
+                state = .loadError(error.localizedDescription.localizedKey)
             }
         }
     }
@@ -57,12 +66,18 @@ class MainViewModel: StateViewModel {
     @MainActor
     func refresh()  {
         Task {
+
+            defer {
+                showToast = true
+            }
             do {
                 state = .onRefresh
-                images = try await Fetcher.fetchWeek().get()
+                images = try await Fetcher.fetchWeek(mkt: pref.language.mkt).get()
                 state = .refreshCompleted
+                toast = Toast(type: .success, title: L10n.Toast.refreshCompleted)
             } catch {
-                state = .refreshError(error.localizedDescription)
+                state = .refreshError(error.localizedDescription.localizedKey)
+                toast = Toast(type: .failure, title: L10n.Toast.refreshFailed)
             }
         }
     }

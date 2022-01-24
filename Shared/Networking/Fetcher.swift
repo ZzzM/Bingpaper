@@ -11,9 +11,9 @@ struct Fetcher {
 
     private static let shared = Fetcher()
 
-    static func fetchWeek(size: String = "7") async -> Result<[Paper], Error> {
+    static func fetchWeek(size: String = "7", mkt: String) async -> Result<[Paper], Error> {
         do {
-            let reulst: Result<Papers, Error> = await shared.request(.fetchPapers(size))
+            let reulst: Result<Papers, Error> = await shared.request(.fetchPapers(size, mkt))
             let images = try reulst.get().images
             return .success(images)
         } catch {
@@ -21,9 +21,9 @@ struct Fetcher {
         }
     }
 
-    static func fetchToday() async -> Result<Paper, Error> {
+    static func fetchToday(mkt: String) async -> Result<Paper, Error> {
         do {
-            let images = try await fetchWeek(size: "1").get()
+            let images = try await fetchWeek(size: "1", mkt: mkt).get()
             if images.isEmpty {
                 return .failure(FetcherError.url)
             }

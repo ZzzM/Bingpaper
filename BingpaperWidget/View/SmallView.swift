@@ -32,15 +32,15 @@ struct SmallView: View {
 
 struct SmallDateView: View {
 
-    @EnvironmentObject
-    private var pref: WidgetPreference
+    private let pref = Preference.shared
 
     let height: CGFloat
 
     var body: some View {
         VStack {
-            Text(Date().weekdayName).fontWith(.title3)
-                .foregroundColor(pref.tint)
+            Text(Date(), formatter: DateFormatter.weekday)
+                .fontWith(.title3)
+                .foregroundColor(pref.palette.color)
             Spacer()
             Text(Date().dayName).fontWith(.largeTitle)
         }
@@ -50,8 +50,7 @@ struct SmallDateView: View {
 
 struct SmallFootnote: View {
 
-    @EnvironmentObject
-    private var pref: WidgetPreference
+    private let pref = Preference.shared
 
     let entry: Entry
 
@@ -67,7 +66,7 @@ struct SmallFootnote: View {
                 .background {
                     HStack {
                         Rectangle()
-                            .foregroundColor(pref.tint)
+                            .foregroundColor(pref.palette.color)
                             .frame(width: 5)
                             .cornerRadius(2)
                         Spacer()

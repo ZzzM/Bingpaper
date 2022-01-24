@@ -6,36 +6,16 @@ class PaperViewModel: StateViewModel {
     var isFull = true
 
     @Published
-    var isPresented = false
+    var showAlert = false
 
     @Published
-    var type: HintType = .none
+    var showToast = false
 
-    var isFailure: Bool {
-        if  case .loadError = state {
-            return true
-        }
-        return false
-    }
-
-    var showHint: Bool {
-        switch type {
-        case .none: return false
-        default: return true
-        }
-    }
+    var toast = Toast.deafult
 
     var isFinished: Bool {
         .loadComplete == state && !isFull
     }
-
-    var errorMessage: String {
-        if case let .loadError(message) = state {
-            return message
-        }
-        return ""
-    }
-
 
     private var image: UIImage?
 
@@ -50,7 +30,7 @@ class PaperViewModel: StateViewModel {
     }
 
     func onFailure(_ error: Error) {
-        state = .loadError(error.localizedDescription)
+        state = .loadError(error.localizedDescription.localizedKey)
     }
 
     func onSuccess(_ cpImage: UIImage) {
@@ -64,19 +44,20 @@ class PaperViewModel: StateViewModel {
     func save() {
         
         Task {
-
+            
             await PhotoLibrary.requestAuthorizationForAddOnly()
 
             guard PhotoLibrary.isAuthorizedForAddOnly else {
-                isPresented.toggle()
+                showAlert.toggle()
                 return
             }
 
-            type = .none
             if  await PhotoLibrary.saveToAblum(image!) {
-                type = .success("已保存到相册")
+                showToast = true
+                toast = Toast(type: .success, title: L10n.Toast.albumCompleted)
             } else {
-                type = .failure("保存失败")
+                showToast = true
+                toast = Toast(type: .failure, title: L10n.Toast.albumFailed)
             }
 
         }

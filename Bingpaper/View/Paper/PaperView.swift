@@ -15,7 +15,7 @@ struct PaperView: View {
     @Environment(\.presentationMode)
     private var presentationMode
 
-    let paper: Paper
+    private let paper: Paper
 
     init(_ paper: Paper) {
         self.paper = paper
@@ -30,68 +30,77 @@ struct PaperView: View {
     var body: some View {
 
         NavigationView {
-
             ZStack {
-
-                if viewModel.isFailure {
-                    RetryView(viewModel.errorMessage, action: viewModel.onLoading)
-                } else {
-                    PhotoView(paper.url, width: UIScreen.width,
-                              onProgress: { CircleProgressView(completed: $0)},
-                              onFailure: viewModel.onFailure,
-                              onSuccess: viewModel.onSuccess,
-                              onTapGesture: viewModel.fullToggle)
-                }
-
-                VStack {
-
-                    if viewModel.showHint {
-                        HintView(type: viewModel.type)
-                    }
-
-                    Spacer()
-
-                    if viewModel.isFinished {
-                        PaperFootnote(paper: paper)
-                    }
-
-                }
-
+                content
+                footnote
             }
             .toolbar {
-
-                ToolbarItem(placement: .cancellationAction) {
-                    if !viewModel.isFull {
-                        PaperButton(imageName: "xmark") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-
-                ToolbarItem {
-                    if viewModel.isFinished {
-                        PaperButton(imageName: "arrow.down") {
-                            viewModel.save()
-                        }
-                        .open("打开相册写入权限？", isPresented: $viewModel.isPresented)
-                    }
-                }
-
+                toolbarContent
             }
         }
         .preferredColorScheme(.dark)
         .statusBar(hidden: viewModel.isFull)
         .onAppear(perform: viewModel.fullToggle)
         .onDisappear(perform: viewModel.fullToggle)
-
+        .toast(isPresenting: $viewModel.showToast, toast: viewModel.toast)
     }
+
+
+    @ViewBuilder
+    private var content: some View {
+        if case .loadError(let message) = viewModel.state {
+            RetryView(message, action: viewModel.onLoading)
+        } else {
+            PhotoView(paper.url, width: UIScreen.width,
+                      onProgress: { CircleProgressView(completed: $0)},
+                      onFailure: viewModel.onFailure,
+                      onSuccess: viewModel.onSuccess,
+                      onTapGesture: viewModel.fullToggle)
+        }
+    }
+
+
+    @ViewBuilder
+    private var footnote: some View {
+        VStack {
+            Spacer()
+            if viewModel.isFinished {
+                PaperFootnote(paper: paper)
+            }
+        }
+    }
+
+
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+
+        ToolbarItem(placement: .cancellationAction) {
+            if !viewModel.isFull {
+                PaperButton(image: .close) {
+                    if viewModel.showToast { return }
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }
+
+        ToolbarItem {
+            if viewModel.isFinished {
+                PaperButton(image: .download) {
+                    viewModel.save()
+                }
+                .open(L10n.Alert.requestPermission, isPresented: $viewModel.showAlert)
+            }
+        }
+    }
+
+
 }
 
 struct PaperButton: View {
-    let imageName: String, action: VoidClosure
+    let image: Image, action: VoidClosure
     var body: some View {
         Button(action: action) {
-            Image(systemName: imageName)
+            image
                 .foregroundColor(.white)
                 .imageScale(.small)
                 .frame(width: 30, height: 30)
@@ -99,7 +108,6 @@ struct PaperButton: View {
                 .clipShape(Circle())
         }
     }
-
 }
 
 

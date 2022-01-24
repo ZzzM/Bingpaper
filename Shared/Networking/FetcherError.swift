@@ -7,9 +7,9 @@ enum FetcherError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .url: return "URL错误"
-        case .http(let code): return "Http 错误：\(code)"
-        case .server(let result): return "数据请求错误：" + result
+        case .url: return L10n.Error.url
+        case .http(let code): return L10n.Error.http + "\(code)"
+        case .server(let result): return L10n.Error.server + result
         }
     }
     

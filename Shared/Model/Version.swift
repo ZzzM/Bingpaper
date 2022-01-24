@@ -33,6 +33,7 @@ struct Version: Decodable {
 
         let version = try container.decode(String.self, forKey: .versionShort)
         let build = try container.decode(String.self, forKey: .build)
+
         isLatest = AppInfo.version.value == version ? AppInfo.build.value == build : false
 
         changelog = "\(version)( \(build) )" + "\n" + _changelog

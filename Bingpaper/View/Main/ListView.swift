@@ -68,15 +68,19 @@ struct ListItem: View {
                 .disabled(true)
             }
 
-            Spacer()
 
-            VStack {
-                Text(title)
-                    .font(.subheadline)
-                    .lineLimit(2)
-                Spacer()
-                Text(ps)
-                    .font(.caption2)
+            GeometryReader { poxy in
+                VStack {
+                    Text(title)
+                        .font(.subheadline)
+                        .frame(width: poxy.size.width, alignment: .trailing)
+                        .lineLimit(3)
+                    Spacer()
+                    Text(ps)
+                        .font(.caption2)
+                        .frame(width: poxy.size.width, alignment: .trailing)
+                        .lineLimit(1)
+                }
             }
             .padding()
             .redacted(reason: reason)

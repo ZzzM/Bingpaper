@@ -6,8 +6,12 @@
 //
 
 import WidgetKit
+import SwiftUI
 
 struct Provider: TimelineProvider {
+
+
+    private let pref = Preference.shared
 
     func placeholder(in context: Context) -> Entry {
         Entry()
@@ -21,7 +25,7 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
 
         Task {
-            let timeline = await WidgetFetcher.fetchPaper()
+            let timeline = await WidgetFetcher.fetchPaper(mkt: pref.language.mkt)
             completion(timeline)
         }
 

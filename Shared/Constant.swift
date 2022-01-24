@@ -14,6 +14,7 @@ typealias FailureClosure = (Error) -> Void
 enum AppStorageKey {
     static let theme = "AppStorageKey.theme"
     static let palette = "AppStorageKey.palette"
+    static let language = "AppStorageKey.language"
 }
 
 extension UserDefaults {
@@ -31,12 +32,16 @@ extension NotificationCenter.Publisher {
 
 enum WidgetInfo {
     static let kind = "bingpaper.widget"
-    static let displayName = "Bing 壁纸日历"
-    static let description = "一个显示 Bing 壁纸和日历的小组件"
+    static let displayName = "widget.displayName".localizedKey
+    static let description = "widget.description".localizedKey
 }
 
 enum URLScheme {
     static let `default` = "Bingpaper"
+}
+
+extension URL {
+    static let repo = URL(string: "https://github.com/ZzzM/Bingpaper")!
 }
 
 
@@ -46,6 +51,12 @@ extension UIImage {
 
 extension Image {
     static let settings = Image(systemName: "gearshape.fill")
+    static let warning = Image(systemName: "exclamationmark.circle.fill")
+    static let failure = Image(systemName: "xmark.circle.fill")
+    static let success = Image(systemName: "checkmark.circle.fill")
+    static let download = Image(systemName: "arrow.down")
+    static let close = Image(systemName: "xmark")
+    static let appLogo = Image.init("AppLogo", bundle: .main)
 }
 
 extension Color {
@@ -57,29 +68,6 @@ extension Font {
     static let `default` = Font.system(size: 16, weight: .light, design: .rounded)
 }
 
-extension Locale {
-    static let `default` = Locale(identifier: "zh")
-}
-
-extension Calendar {
-    static var `defatult`: Calendar {
-        var calendar = Calendar.current
-        calendar.locale = .default
-        return calendar
-    }
-}
-
-extension DateFormatter {
-    static var `default`: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.default
-        return dateFormatter
-    }
-}
-
-extension Array where Element == (Int, String) {
-    static let weekdaySymbols = Calendar.defatult.veryShortWeekdaySymbols.enumerated() + []
-}
 
 extension Array where Element == GridItem {
     static let weekdayColumns = [GridItem](repeating: .init(.adaptive(minimum: 15, maximum: 17)), count: 7)
