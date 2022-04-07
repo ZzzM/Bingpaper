@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AcknowList
 
 struct SettingsView: View {
 
