@@ -35,7 +35,7 @@ Requires **iOS 15.0** or later.
 
 <img src="assets/p01.png" width="200px"><img src="assets/p02.png" width="200px"><img src="assets/w01.png" width="200px"><img src="assets/w02.png" width="200px">
 
-## Libraries
+## Dependencies
 
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
 - [MarkdownUI](https://github.com/gonzalezreal/MarkdownUI)
