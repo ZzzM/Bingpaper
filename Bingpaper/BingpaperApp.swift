@@ -23,7 +23,7 @@ struct BingpaperApp: App {
                                          transitionMaskImage: UIImage.backward)
         bar.standardAppearance = appearance
         bar.scrollEdgeAppearance = appearance
-
+      
     }
 
 

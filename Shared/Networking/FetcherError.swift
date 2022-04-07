@@ -8,8 +8,10 @@ enum FetcherError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .url: return L10n.Error.url
-        case .http(let code): return L10n.Error.http + "\(code)"
-        case .server(let result): return L10n.Error.server + result
+        case .http(let code):
+            return L10n.Error.http != nil ? L10n.Error.http! + "\(code)" : .none
+        case .server(let result):
+            return L10n.Error.server != nil ? L10n.Error.server! + result : .none
         }
     }
     

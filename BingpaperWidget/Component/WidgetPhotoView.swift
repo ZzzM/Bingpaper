@@ -9,12 +9,12 @@ import SwiftUI
 
 struct WidgetPhotoView: View {
 
-    let entry: Entry, width: CGFloat, height: CGFloat
+    let image: UIImage?, isValid: Bool, width: CGFloat, height: CGFloat
 
     var body: some View {
         ZStack {
-            if entry.isValid {
-                Image(uiImage: entry.image!)
+            if isValid, image != nil {
+                Image(uiImage: image!)
                     .resizable()
                     .frame(width: width, height: height)
             } else {

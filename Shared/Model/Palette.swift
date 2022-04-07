@@ -9,8 +9,6 @@ import SwiftUI
 
 enum Palette: String, CaseIterable {
 
-    static let `default`: Palette = .red
-
     case
     red,
     orange,

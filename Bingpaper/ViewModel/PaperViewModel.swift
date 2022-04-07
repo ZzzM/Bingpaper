@@ -30,7 +30,7 @@ class PaperViewModel: StateViewModel {
     }
 
     func onFailure(_ error: Error) {
-        state = .loadError(error.localizedDescription.localizedKey)
+        state = .loadError(error.localizedDescription.l10nKey)
     }
 
     func onSuccess(_ cpImage: UIImage) {

@@ -10,58 +10,90 @@ import UIKit
 
 extension Date {
 
-    private var calendar: Calendar {
-        Calendar.current
-    }
-
     var inToday: Bool {
-        calendar.isDateInToday(self)
+        Calendar.gregorian.isDateInToday(self)
     }
 
     var inWeekend: Bool {
-        calendar.isDateInWeekend(self)
+        Calendar.gregorian.isDateInWeekend(self)
     }
 
     var month: Int {
-        calendar.component(.month, from: self)
+        Calendar.gregorian.component(.month, from: self)
     }
 
 
     var day: Int {
-        calendar.component(.day, from: self)
-    }
-
-    var dayName: String {
-        day.description
+        Calendar.gregorian.component(.day, from: self)
     }
 
     var weekday: Int {
-        calendar.component(.weekday, from: self)
+        Calendar.gregorian.component(.weekday, from: self)
     }
 
     var startOfMonth: Date {
-        let dateComponents = calendar.dateComponents([.year, .month], from: self)
-        return calendar.date(from: dateComponents) ?? Date()
+        let dateComponents = Calendar.gregorian.dateComponents([.year, .month], from: self)
+        return Calendar.gregorian.date(from: dateComponents) ?? self
     }
 
     var startOfTomorrow: Date {
-        let startOfDay = calendar.startOfDay(for: self)
-        return calendar.date(byAdding: .day, value: 1, to: startOfDay) ?? Date()
+        let startOfDay = Calendar.gregorian.startOfDay(for: self)
+        return Calendar.gregorian.date(byAdding: .day, value: 1, to: startOfDay) ?? self
     }
 
     var after15min: Date {
-        calendar.date(byAdding: .minute, value: 15, to: self) ?? Date()
+        Calendar.gregorian.date(byAdding: .minute, value: 15, to: self) ?? Date()
     }
 
-    var daysOfMonth: [Date] {
-        guard let range = calendar.range(of: .day, in: .month, for: self) else {
-            return []
+    func inSameMonth(as date: Date) -> Bool {
+        Calendar.gregorian.isDate(self, equalTo: date, toGranularity: .month)
+    }
+
+}
+
+extension Calendar {
+
+    func generateDates(for date: Date) -> [Date] {
+
+        var dates: [Date] = []
+
+        guard let range = range(of: .day, in: .month, for: date) else {
+            return dates
         }
         // Range(1..<?) to 0..<?
-        let addValues = Array(range).indices
-        return addValues.compactMap{
-            calendar.date(byAdding: .day, value: $0, to: startOfMonth)
+        let startOfMonth = date.startOfMonth
+        for value in Array(range).indices {
+            let date = self.date(byAdding: .day, value: value, to: startOfMonth) ?? startOfMonth
+            dates.append(date)
         }
+
+        var weekday = startOfMonth.weekday
+        weekday += weekday >= firstWeekday ? 0 : DaysInWeek
+
+        let lastCount = weekday - firstWeekday
+
+        if lastCount > 0 {
+            var lastDates: [Date] = []
+            for value in (1...lastCount).reversed() {
+                let date = self.date(byAdding: .day, value: -value, to: startOfMonth) ?? startOfMonth
+                lastDates.append(date)
+            }
+            dates = lastDates + dates
+        }
+
+        let total = dates.count > MinDates ? MaxDates: MinDates
+        let nextCount = total - dates.count
+
+        if nextCount > 0, let endOfMonth = dates.last {
+            var nextDates: [Date] = []
+            for value in 1...nextCount {
+                let date = self.date(byAdding: .day, value: value, to: endOfMonth) ?? endOfMonth
+                nextDates.append(date)
+            }
+            dates += nextDates
+        }
+
+        return dates
     }
 
 }
@@ -69,11 +101,11 @@ extension Date {
 extension String {
     var urlEncoded: String {
         addingPercentEncoding(withAllowedCharacters:
-                                        .alphanumerics) ?? ""
+                                        .alphanumerics) ?? self
     }
 
     var urlDecoded: String {
-        removingPercentEncoding ?? ""
+        removingPercentEncoding ?? self
     }
 
 }
@@ -91,22 +123,9 @@ extension URLComponents {
         }
         return _parameters
     }
-
 }
 
-extension DateFormatter {
-    static var weekday: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE"
-        return dateFormatter
-    }
-    static var month: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM"
-        return dateFormatter
-    }
-  
-}
+
 
 @available(iOSApplicationExtension, unavailable)
 extension URL {

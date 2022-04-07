@@ -17,8 +17,9 @@
 "settings.language" = "语言";
 "settings.permission" = "权限";
 "settings.cache" = "数据缓存";
-"settings.about" = "关于 Bingpaper";
-"settings.changelog" = "版本记录";
+"settings.changelogs" = "更新日志";
+"settings.licenses" = "开源许可";
+"settings.newVersion" = "新版本可用";
 
 "theme.system" = "跟随系统";
 "theme.dark" = "深色";
@@ -36,7 +37,6 @@
 "alert.request.permission" = "开启照片写入权限?";
 "alert.install" = "安装更新?";
 "alert.clear" = "清理缓存？";
-"alert.new" = "新!";
 
 "error.url" = "URL 错误";
 "error.http" = "Http 错误: ";

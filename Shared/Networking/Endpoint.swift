@@ -30,7 +30,7 @@ extension Endpoint {
 
     private var path: String {
         if case .checkForUpdate = self {
-            return "/apps/latest/" + AppInfo.identifier.value
+            return "/apps/latest/" + AppInfo.id
         } else {
             return "/HPImageArchive.aspx"
         }
@@ -41,7 +41,7 @@ extension Endpoint {
         case .fetchPapers(let size, let mkt):
             return ["format": "js", "idx": "0", "n": size, "mkt": mkt]
         case .checkForUpdate:
-            return ["api_token": AppInfo.firToken.value, "type": "ios"]
+            return ["api_token": AppInfo.firToken, "type": "ios"]
         }
     }
 

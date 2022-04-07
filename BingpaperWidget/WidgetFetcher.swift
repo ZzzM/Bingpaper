@@ -31,11 +31,4 @@ struct WidgetFetcher {
         return timeline
     }
 
-
-    static func fetchDays() -> [PaperDay] {
-        let date = Date(), offset = date.startOfMonth.weekday - 1
-        return .init(repeating: PaperDay(), count: offset) + date.daysOfMonth.map{PaperDay($0)}
-    }
-    
-
 }

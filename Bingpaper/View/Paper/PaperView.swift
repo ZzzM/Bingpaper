@@ -60,7 +60,6 @@ struct PaperView: View {
     }
 
 
-    @ViewBuilder
     private var footnote: some View {
         VStack {
             Spacer()

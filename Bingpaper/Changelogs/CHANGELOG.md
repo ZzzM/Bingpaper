@@ -1,3 +1,14 @@
+## 1.0.3 - 2022-04-07
+
+### Added
+- Open source licenses
+
+### Changed
+- Widget UI
+- Settings UI
+
+---
+
 ## 1.0.2 - 2022-01-24
 
 ### Added

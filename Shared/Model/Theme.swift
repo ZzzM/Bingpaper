@@ -9,8 +9,6 @@ import SwiftUI
 enum Theme: Int, CaseIterable {
     case system, light, dark
 
-    static let `default`: Theme = .system
-
     var colorScheme: ColorScheme? {
         switch self {
         case .light: return .light
@@ -19,7 +17,7 @@ enum Theme: Int, CaseIterable {
         }
     }
 
-    var displayName: LocalizedStringKey {
+    var title: LocalizedStringKey {
         switch self {
         case .light: return L10n.Theme.light
         case .dark: return L10n.Theme.dark

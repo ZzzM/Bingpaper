@@ -8,18 +8,22 @@
 import Foundation
 
 
-enum AppInfo: String {
+struct AppInfo {
 
-    case firToken = "FIR_CLI_API_TOKEN",
-         build = "CFBundleVersion",
-         version = "CFBundleShortVersionString",
-         identifier = "CFBundleIdentifier",
-         name = "CFBundleName"
-
-    var value: String {
-        Bundle.main.infoDictionary?[rawValue] as? String ?? "none"
+    private enum InfoKey: String {
+        case build = "CFBundleVersion",
+             version = "CFBundleShortVersionString",
+             identifier = "CFBundleIdentifier",
+             name = "CFBundleName",
+             firToken = "FIR_CLI_API_TOKEN"
     }
 
-    static let displayVersion = "\(version.value) ( \(build.value) )"
-    static let displayName = name.value
+    private static func value(for key: InfoKey) -> String { Bundle.main.infoDictionary?[key.rawValue] as? String ?? "none" }
+
+    static let name = value(for: .name)
+    static let version = value(for: .version)
+    static let build = value(for: .build)
+    static let id = value(for: .identifier)
+    static let firToken = value(for: .firToken)
+
 }

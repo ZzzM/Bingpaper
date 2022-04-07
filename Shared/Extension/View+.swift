@@ -16,14 +16,14 @@ extension Text {
 extension View {
 
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+        clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
 
-    func barTitle(_ titleKey: LocalizedStringKey) -> some View {
+    func barTitle(_ title: LocalizedStringKey) -> some View {
         navigationTitle("")
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(titleKey).fontWith(.title2)
+                    Text(title).fontWith(.title2)
                 }
             }
     }

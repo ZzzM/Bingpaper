@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AcknowList
 
 struct SettingsView: View {
 
@@ -21,14 +22,13 @@ struct SettingsView: View {
             Group {
                 GeneralSection()
                 PermissionSection()
-                Section(L10n.Settings.other) {
-                    CacheRow(size: viewModel.cacheSize) { viewModel.cacheClear() }
-                    ChangelogRow()
-                    AboutRow(version: viewModel.version)
-                }
+                CacheRow(size: viewModel.cacheSize) { viewModel.cacheClear() }
+                AboutSection()
             }
             .textCase(.none)
             .listRowBackground(Color.cellBackground)
+
+            VersionView(version: viewModel.version)
 
         }
         .onAppear(perform: {
@@ -49,21 +49,20 @@ struct GeneralSection: View {
 
     var body: some View {
 
-        Section(L10n.Settings.general) {
-
-            GeneralPicker(titleKey: L10n.Settings.language,
+        Section {
+            GeneralPicker(title: L10n.Settings.language,
                           items: Language.allCases,
                           selection: $pref.language) {
-                Text($0.displayName)
+                Text($0.title)
             }
 
-            GeneralPicker(titleKey: L10n.Settings.theme,
+            GeneralPicker(title: L10n.Settings.theme,
                           items: Theme.allCases,
                           selection: $pref.theme) {
-                Text($0.displayName)
+                Text($0.title)
             }
 
-            GeneralPicker(titleKey: L10n.Settings.palette,
+            GeneralPicker(title: L10n.Settings.palette,
                           items: Palette.allCases,
                           selection: $pref.palette) {
                 Circle()
@@ -71,7 +70,6 @@ struct GeneralSection: View {
                     .foregroundColor($0.color)
 
             }
-
         }
 
     }
@@ -84,7 +82,7 @@ struct PermissionSection: View {
 
     var body: some View {
         if PhotoLibrary.isDeterminedForAddOnly {
-            Section(L10n.Settings.permission) {
+            Section {
                 Toggle(L10n.Permission.addPhotos, isOn: .constant(PhotoLibrary.isAuthorizedForAddOnly))
                     .toggleStyle(CheckboxStyle(active: false))
                     .onTapGesture {
@@ -96,6 +94,14 @@ struct PermissionSection: View {
     }
 }
 
+struct AboutSection: View {
+    var body: some View {
+        Section {
+            NavigationLink.init(L10n.Settings.changelogs, destination: ChangelogsView.init)
+            NavigationLink.init(L10n.Settings.licenses, destination: LicensesView.init)
+        }
+    }
+}
 
 struct CacheRow: View {
 
@@ -117,14 +123,8 @@ struct CacheRow: View {
 
 }
 
-struct ChangelogRow: View {
-    var body: some View {
-        NavigationLink.init(L10n.Settings.changelog, destination: ChangelogView.init)
-    }
 
-}
-
-struct AboutRow: View {
+struct VersionView: View {
 
     @State
     private var isPresented = false
@@ -133,22 +133,26 @@ struct AboutRow: View {
 
     var body: some View {
 
-        SettingsRow(title: L10n.Settings.about) {
-            isPresented.toggle()
-        } label: {
+        Section(content: {}, footer: {
             HStack {
-                Text(AppInfo.displayVersion).foregroundColor(.secondary)
+                Spacer()
+                Text("Version  \(AppInfo.version) ( \(AppInfo.build) )").foregroundColor(.secondary)
                 if !version.isLatest {
-                    Text(L10n.Alert.new)
-                        .font(.caption)
-                        .padding(5)
-                        .foregroundColor(.white)
-                        .background(.tint)
-                        .cornerRadius(5)
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Text(L10n.Settings.newVersion)
+                            .font(.caption2)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 3)
+                            .foregroundColor(.white)
+                            .background(Color.accentColor)
+                            .clipShape(Capsule())
+                    }
                 }
+                Spacer()
             }
-        }
-        .disabled(version.isLatest)
+        })
         .open(L10n.Alert.install,
               message: version.changelog,
               urlString: version.installUrl,
@@ -162,7 +166,6 @@ struct SettingsRow<Label: View>: View {
 
     let title: LocalizedStringKey, action: VoidClosure
 
-    @ViewBuilder
     let label: () -> Label
 
     var body: some View {

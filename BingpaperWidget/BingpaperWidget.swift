@@ -11,13 +11,14 @@ import SwiftUI
 @main
 struct BingpaperWidget: Widget {
 
-    private let pref = Preference.shared
+    private let locale = Preference.shared.language.locale
+    private var colorScheme: ColorScheme? { Preference.shared.theme.colorScheme }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: WidgetInfo.kind, provider: Provider()) { entry in
             WidgetContent(entry: entry)
-                .environment(\.locale, pref.language.locale)
-                .modifier(ColorSchemeModifier(colorScheme: pref.theme.colorScheme))
+                .environment(\.locale, locale)
+                .modifier(ColorSchemeModifier(colorScheme: colorScheme))
         }
         .supportedFamilies([.systemSmall, .systemMedium])
         .configurationDisplayName(WidgetInfo.displayName)
@@ -48,4 +49,6 @@ struct ColorSchemeModifier: ViewModifier {
         }
     }
 }
+
+
 

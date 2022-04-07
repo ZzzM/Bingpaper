@@ -11,11 +11,11 @@ class Preference: ObservableObject {
     static let shared = Preference()
 
     @AppStorage(AppStorageKey.theme, store: UserDefaults.default)
-    var theme: Theme = .default
+    var theme: Theme = .system
 
     @AppStorage(AppStorageKey.palette, store: UserDefaults.default)
-    var palette: Palette = .default
+    var palette: Palette = .red
 
     @AppStorage(AppStorageKey.language, store: UserDefaults.default)
-    var language: Language = .default
+    var language: Language = .system
 }

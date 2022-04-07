@@ -14,13 +14,13 @@ struct SmallView: View {
         VStack {
 
             HStack {
-                WidgetPhotoView(entry: entry, width: 70, height: 70)
+                WidgetPhotoView(image: entry.image, isValid: entry.isValid, width: 70, height: 70)
                     .widgetURL(entry.widgetURL)
                 Spacer()
-                SmallDateView(height: 70)
+                SmallDateView(date: entry.date, height: 70)
             }
             Spacer()
-            SmallFootnote(entry: entry)
+            SmallFootnote(title: entry.title, isValid: entry.isValid)
 
         }
         .padding()
@@ -32,41 +32,43 @@ struct SmallView: View {
 
 struct SmallDateView: View {
 
-    private let pref = Preference.shared
-
-    let height: CGFloat
+    let date: Date, height: CGFloat
 
     var body: some View {
+
+        let foregroundColor = Preference.shared.palette.color
+
         VStack {
-            Text(Date(), formatter: DateFormatter.weekday)
+            Text(L10n.shortWeekday())
                 .fontWith(.title3)
-                .foregroundColor(pref.palette.color)
+                .foregroundColor(foregroundColor)
             Spacer()
-            Text(Date().dayName).fontWith(.largeTitle)
+            Text(date.day.description).fontWith(.largeTitle)
         }
-        .frame(height: 70)
+        .frame(height: height)
     }
 }
 
 struct SmallFootnote: View {
 
-    private let pref = Preference.shared
-
-    let entry: Entry
+    let title: String, isValid: Bool
 
     var body: some View {
+
+        let foregroundColor = Preference.shared.palette.color
+
         HStack {
-            Text(entry.title)
+            Text(title)
                 .fontWith(.caption2)
                 .lineLimit(3)
                 .lineSpacing(5)
-                .redacted(reason: entry.isValid ? []:.placeholder)
+                .redacted(reason: isValid ? []:.placeholder)
                 .foregroundColor(.secondary)
                 .padding(.leading)
                 .background {
                     HStack {
                         Rectangle()
-                            .foregroundColor(pref.palette.color)
+                            .foregroundColor(foregroundColor)
                             .frame(width: 5)
                             .cornerRadius(2)
                         Spacer()

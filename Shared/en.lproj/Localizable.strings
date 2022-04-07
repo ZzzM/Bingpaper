@@ -18,20 +18,23 @@
 "settings.palette" = "Palette";
 "settings.language" = "Language";
 "settings.permission" = "Permission";
-"settings.cache" = "Data Cache";
-"settings.about" = "About Bingpaper";
-"settings.changelog" = "Changelog";
+"settings.cache" = "Data cache";
+"settings.changelogs" = "Changelogs";
+"settings.licenses" = "Open source licenses";
+"settings.newVersion" = "New version available";
 
 
-"theme.system" = "Follow System";
+
+
+"theme.system" = "Follow system";
 "theme.dark" = "Dark";
 "theme.light" = "Light";
 
-"language.system" = "Follow System";
+"language.system" = "Follow system";
 "language.chinese" = "简体中文";
 "language.english" = "English";
 
-"permission.addPhotos" = "Add Photos Only";
+"permission.addPhotos" = "Add photos only";
 
 
 "alert.ok" = "OK";
@@ -40,7 +43,7 @@
 "alert.request.permission" = "Enable photo write permission?";
 "alert.install" = "Install Updates?";
 "alert.clear" = "Clear Cache?";
-"alert.new" = "New!";
+
 
 "error.url" = "URL Error";
 "error.http" = "Http Error: ";

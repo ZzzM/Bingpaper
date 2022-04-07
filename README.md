@@ -39,3 +39,4 @@ Requires **iOS 15.0** or later.
 
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
 - [MarkdownUI](https://github.com/gonzalezreal/MarkdownUI)
+- [AlertToast](https://github.com/elai950/AlertToast)

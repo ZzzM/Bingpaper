@@ -4,8 +4,6 @@ import SwiftUI
 
 class MainViewModel: StateViewModel {
 
-    private let pref = Preference.shared
-    
     @Published
     var date = Date()
 
@@ -55,10 +53,10 @@ class MainViewModel: StateViewModel {
         Task {
             do {
                 state = .onLoading
-                images = try await Fetcher.fetchWeek(mkt: pref.language.mkt).get()
+                images = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
                 state = isEmpty ? .loadError(L10n.Error.empty):.loadComplete
             } catch {
-                state = .loadError(error.localizedDescription.localizedKey)
+                state = .loadError(error.localizedDescription.l10nKey)
             }
         }
     }
@@ -72,11 +70,11 @@ class MainViewModel: StateViewModel {
             }
             do {
                 state = .onRefresh
-                images = try await Fetcher.fetchWeek(mkt: pref.language.mkt).get()
+                images = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
                 state = .refreshCompleted
                 toast = Toast(type: .success, title: L10n.Toast.refreshCompleted)
             } catch {
-                state = .refreshError(error.localizedDescription.localizedKey)
+                state = .refreshError(error.localizedDescription.l10nKey)
                 toast = Toast(type: .failure, title: L10n.Toast.refreshFailed)
             }
         }

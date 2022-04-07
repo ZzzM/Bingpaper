@@ -11,10 +11,24 @@ import SwiftUI
 typealias VoidClosure = () -> Void
 typealias FailureClosure = (Error) -> Void
 
+
+
+let DaysInWeek =  7, MinDates = 35, MaxDates = 42
+
 enum AppStorageKey {
     static let theme = "AppStorageKey.theme"
     static let palette = "AppStorageKey.palette"
     static let language = "AppStorageKey.language"
+}
+
+extension Calendar {
+    static let gregorian = Calendar(identifier: .gregorian)
+    static let chinese = Calendar(identifier: .chinese)
+}
+
+extension Locale {
+    static let en = Locale(identifier: "en")
+    static let zh = Locale(identifier: "zh")
 }
 
 extension UserDefaults {
@@ -32,8 +46,8 @@ extension NotificationCenter.Publisher {
 
 enum WidgetInfo {
     static let kind = "bingpaper.widget"
-    static let displayName = "widget.displayName".localizedKey
-    static let description = "widget.description".localizedKey
+    static let displayName = "widget.displayName".l10nKey
+    static let description = "widget.description".l10nKey
 }
 
 enum URLScheme {
@@ -41,7 +55,7 @@ enum URLScheme {
 }
 
 extension URL {
-    static let repo = URL(string: "https://github.com/ZzzM/Bingpaper")!
+    static let gitHub = URL(string: "https://github.com/ZzzM/Bingpaper")!
 }
 
 
@@ -67,6 +81,8 @@ extension Color {
 extension Font {
     static let `default` = Font.system(size: 16, weight: .light, design: .rounded)
 }
+
+
 
 
 extension Array where Element == GridItem {
