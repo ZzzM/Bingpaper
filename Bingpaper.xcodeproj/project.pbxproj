@@ -28,6 +28,8 @@
 		982E715C2732782400DFDE69 /* WidgetFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E715A2732775F00DFDE69 /* WidgetFetcher.swift */; };
 		982E715D2732848400DFDE69 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C556422727EE2900A2F1D8 /* Fetcher.swift */; };
 		982E715E2732848A00DFDE69 /* FetcherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C556432727EE2900A2F1D8 /* FetcherError.swift */; };
+		9847B05F2806B80A00C28133 /* CHANGELOG_SC.md in Resources */ = {isa = PBXBuildFile; fileRef = 9847B05D2806B80A00C28133 /* CHANGELOG_SC.md */; };
+		9847B0602806B80A00C28133 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 9847B05E2806B80A00C28133 /* CHANGELOG.md */; };
 		984B4621272928D800F48447 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B461F272928D800F48447 /* MainViewModel.swift */; };
 		984B4622272928D800F48447 /* PaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B4620272928D800F48447 /* PaperViewModel.swift */; };
 		985B406F2797F8CF00DA40CC /* GeneralPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985B406E2797F8CF00DA40CC /* GeneralPicker.swift */; };
@@ -44,8 +46,6 @@
 		988A82BC279E3849000899B5 /* UIKit+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5562B2727E2AB00A2F1D8 /* UIKit+.swift */; };
 		988A82BE279E47D0000899B5 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A82BD279E47D0000899B5 /* ToastView.swift */; };
 		988A82C5279E9786000899B5 /* ChangelogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A82C4279E9786000899B5 /* ChangelogsView.swift */; };
-		988A82C9279E99FE000899B5 /* CHANGELOG_SC.md in Resources */ = {isa = PBXBuildFile; fileRef = 988A82C7279E99FE000899B5 /* CHANGELOG_SC.md */; };
-		988A82CA279E99FE000899B5 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 988A82C8279E99FE000899B5 /* CHANGELOG.md */; };
 		98BBDABE273BCFB3003F60D2 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBDABD273BCFB3003F60D2 /* Version.swift */; };
 		98C555E52727AAAC00A2F1D8 /* BingpaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C555E42727AAAC00A2F1D8 /* BingpaperApp.swift */; };
 		98C555E92727AAAE00A2F1D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C555E82727AAAE00A2F1D8 /* Assets.xcassets */; };
@@ -136,6 +136,8 @@
 		982A30392732269A00DCAA94 /* Bingpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bingpaper.entitlements; sourceTree = "<group>"; };
 		982A303A27322A1800DCAA94 /* BingpaperWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BingpaperWidget.entitlements; sourceTree = "<group>"; };
 		982E715A2732775F00DFDE69 /* WidgetFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFetcher.swift; sourceTree = "<group>"; };
+		9847B05D2806B80A00C28133 /* CHANGELOG_SC.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG_SC.md; sourceTree = SOURCE_ROOT; };
+		9847B05E2806B80A00C28133 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		984B461F272928D800F48447 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		984B4620272928D800F48447 /* PaperViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperViewModel.swift; sourceTree = "<group>"; };
 		985B406E2797F8CF00DA40CC /* GeneralPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPicker.swift; sourceTree = "<group>"; };
@@ -148,8 +150,6 @@
 		9887658C273129DF00F7F5FC /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		988A82BD279E47D0000899B5 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		988A82C4279E9786000899B5 /* ChangelogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogsView.swift; sourceTree = "<group>"; };
-		988A82C7279E99FE000899B5 /* CHANGELOG_SC.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG_SC.md; sourceTree = "<group>"; };
-		988A82C8279E99FE000899B5 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		98BBDABD273BCFB3003F60D2 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		98BBDAC1273E8015003F60D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		98C555E12727AAAC00A2F1D8 /* Bingpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bingpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,15 +270,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		988A82C6279E99D1000899B5 /* Changelogs */ = {
-			isa = PBXGroup;
-			children = (
-				988A82C7279E99FE000899B5 /* CHANGELOG_SC.md */,
-				988A82C8279E99FE000899B5 /* CHANGELOG.md */,
-			);
-			path = Changelogs;
-			sourceTree = "<group>";
-		};
 		98C555D82727AAAC00A2F1D8 = {
 			isa = PBXGroup;
 			children = (
@@ -302,8 +293,9 @@
 		98C555E32727AAAC00A2F1D8 /* Bingpaper */ = {
 			isa = PBXGroup;
 			children = (
+				9847B05D2806B80A00C28133 /* CHANGELOG_SC.md */,
+				9847B05E2806B80A00C28133 /* CHANGELOG.md */,
 				98D4868D27FE832600F5A0FC /* Dependencies */,
-				988A82C6279E99D1000899B5 /* Changelogs */,
 				98BBDAC1273E8015003F60D2 /* Info.plist */,
 				985B4074279A65B500DA40CC /* InfoPlist.strings */,
 				982A30392732269A00DCAA94 /* Bingpaper.entitlements */,
@@ -557,10 +549,10 @@
 				98E0DED8279662E400205F37 /* Localizable.strings in Resources */,
 				98C555F62727AD9200A2F1D8 /* Launch Screen.storyboard in Resources */,
 				98C555EC2727AAAE00A2F1D8 /* Preview Assets.xcassets in Resources */,
+				9847B0602806B80A00C28133 /* CHANGELOG.md in Resources */,
+				9847B05F2806B80A00C28133 /* CHANGELOG_SC.md in Resources */,
 				98D4868E27FE832600F5A0FC /* Dependencies in Resources */,
-				988A82C9279E99FE000899B5 /* CHANGELOG_SC.md in Resources */,
 				98C555E92727AAAE00A2F1D8 /* Assets.xcassets in Resources */,
-				988A82CA279E99FE000899B5 /* CHANGELOG.md in Resources */,
 				985B4072279A65B500DA40CC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
