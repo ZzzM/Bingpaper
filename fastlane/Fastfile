@@ -55,7 +55,7 @@ platform :ios do
       block: proc do |plist|
         plist[:CommitHash] = commit[:abbreviated_commit_hash]
         plist[:CommitDate] = date
-        plist:[:FIR_CLI_API_TOKEN] = ENV["FIR_CLI_API_TOKEN"]
+        plist[:FIR_CLI_API_TOKEN] = ENV["FIR_CLI_API_TOKEN"]
       end
     )
 
