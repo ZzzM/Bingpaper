@@ -135,7 +135,7 @@ struct VersionView: View {
         Section(content: {}, footer: {
             HStack {
                 Spacer()
-                Text("Version  \(AppInfo.version) ( \(AppInfo.build) )").foregroundColor(.secondary)
+                Text("Version  \(AppInfo.version) ( \(AppInfo.commitHash) )").foregroundColor(.secondary)
                 if !version.isLatest {
                     Button {
                         isPresented.toggle()

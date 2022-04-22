@@ -1,3 +1,11 @@
+## 1.0.4 - 2022-04-22
+
+### Changed
+- Version Info
+- Github Action
+
+---
+
 ## 1.0.3 - 2022-04-07
 
 ### Added

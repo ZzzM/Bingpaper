@@ -73,7 +73,7 @@ struct L10n {
 extension L10n {
     static var languageCode: String? { locale.languageCode }
     static var mkt: String { inChinese ? "zh-CN":"en-US" }
-    static var changlogs: String { inChinese ? "CHANGELOG_SC":"CHANGELOG" }
+    static var changlogs: String { "changelogs/" + (inChinese ? "CHANGELOG_SC":"CHANGELOG") }
 }
 
 extension L10n {

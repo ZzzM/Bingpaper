@@ -23,14 +23,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios increment
-
-```sh
-[bundle exec] fastlane ios increment
-```
-
-
-
 ### ios build
 
 ```sh
@@ -51,6 +43,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ```sh
 [bundle exec] fastlane ios clean
+```
+
+
+
+### ios test
+
+```sh
+[bundle exec] fastlane ios test
 ```
 
 

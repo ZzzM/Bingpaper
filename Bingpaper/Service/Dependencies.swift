@@ -10,7 +10,7 @@ import Foundation
 struct Dependencies {
 
     private static var url: URL {
-        guard let url = Bundle.main.url(forResource: "Dependencies", withExtension: .none) else {
+        guard let url = Bundle.main.url(forResource: "dependencies", withExtension: .none) else {
             return Bundle.main.bundleURL
         }
         return url

@@ -13,6 +13,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>CommitDate</key>
+	<string>CommitDate</string>
+	<key>CommitHash</key>
+	<string>CommitHash</string>
 	<key>FIR_CLI_API_TOKEN</key>
 	<string>FIR_CLI_API_TOKEN</string>
 </dict>
