@@ -4,9 +4,9 @@ function read_mobileprovision() {
     local pp_path=$RUNNER_TEMP/$APP_NAME.mobileprovision
     local pp_ne_path=$RUNNER_TEMP/${APP_NAME}_NE.mobileprovision
 
-    echo -n "$CERTIFICATE_DATA" | base64 --decode --output $certificate_path
-    echo -n "$ALPHA_PROFILE_DATA" | base64 --decode --output $pp_path
-    echo -n "$ALPHA_NE_PROFILE_DATA" | base64 --decode --output $pp_ne_path
+    echo -n $CERTIFICATE_DATA | base64 --decode --output $certificate_path
+    echo -n $ALPHA_PROFILE_DATA | base64 --decode --output $pp_path
+    echo -n $ALPHA_NE_PROFILE_DATA | base64 --decode --output $pp_ne_path
 
     echo "CERTIFICATE_PATH=$certificate_path" >> $GITHUB_ENV
     echo "PP_PATH=$pp_path" >> $GITHUB_ENV

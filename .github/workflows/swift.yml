@@ -17,7 +17,7 @@ env:
   FIR_APP_CHANGELOG: CHANGELOG
 
 jobs:
-  Deploy:
+  Release:
     runs-on: macOS-latest
     
     steps:

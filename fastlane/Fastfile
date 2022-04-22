@@ -27,7 +27,6 @@ platform :ios do
 
   lane :setup do
 
-    #provisioning
     keychain_name = "#{APP_NAME}-signing"
     keychain_password = "password"
 
@@ -42,7 +41,6 @@ platform :ios do
     )
 
 
-    # version, commit
     version = last_git_tag
     commit = last_git_commit
     date = Time.now.utc.localtime("+08:00").strftime("%Y.%m.%d %k:%M")  
