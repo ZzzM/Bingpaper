@@ -22,6 +22,7 @@ struct Fetcher {
     }
 
     static func fetchToday(mkt: String) async -> Result<Paper, Error> {
+        
         do {
             let images = try await fetchWeek(size: "1", mkt: mkt).get()
             if images.isEmpty {
@@ -73,8 +74,10 @@ extension Fetcher {
             return .failure(FetcherError.url)
         }
 
+        let request = URLRequest(url: _url)
+
         do {
-            let (data, response) = try await URLSession.shared.data(from: _url)
+            let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
                 return .failure(FetcherError.url)
             }
