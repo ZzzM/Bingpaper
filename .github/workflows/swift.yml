@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup
         run: |
-          fastlane setup
+          bundle exec fastlane setup
 
       - name: Build
         uses: yukiarrr/ios-build-action@v1.5.0
@@ -43,7 +43,7 @@ jobs:
 
       - name: Appcast
         run: |
-          fastlane appcast
+          bundle exec fastlane appcast
           
           
 
