@@ -41,10 +41,10 @@ jobs:
       - name: Changlog
         run: |
           sh scripts/generate_changlog.sh
+          fastlane appcast
 
       - name: Appcast
         run: |
-          echo $PWD;ls
           fastlane appcast
           
           
