@@ -23,30 +23,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios build
-
-```sh
-[bundle exec] fastlane ios build
-```
-
-
-
-### ios package
-
-```sh
-[bundle exec] fastlane ios package
-```
-
-
-
-### ios clean
-
-```sh
-[bundle exec] fastlane ios clean
-```
-
-
-
 ### ios appcast
 
 ```sh
