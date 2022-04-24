@@ -42,9 +42,9 @@ jobs:
           sh scripts/generate_changlog.sh
           echo $PWD;ls
 
-#       - name: Appcast
-#         run: |
-#           fastlane appcast
+      - name: Appcast
+        run: |
+          fastlane lanes
           
           
 
