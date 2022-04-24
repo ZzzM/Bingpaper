@@ -9,6 +9,7 @@ on:
 
 env:
   APP_NAME: Bingpaper
+  FIR_SPECIFY_FILE_PATH: Bingpaper.ipa
   FIR_CLI_API_TOKEN: ${{ secrets.FIR_CLI_API_TOKEN }}
   FIR_APP_CHANGELOG: CHANGELOG
 
@@ -29,7 +30,7 @@ jobs:
         with:
           scheme: ${{ env.APP_NAME }}
           export-method: "ad-hoc"
-          output-path: ${{ env.APP_NAME }}.ipa
+          output-path: ${{ env.FIR_SPECIFY_FILE_PATH }}
           project-path: ${{ env.APP_NAME }}.xcodeproj
           p12-base64: ${{ secrets.ALPHA_P12_BASE64 }}
           mobileprovision-base64: |
