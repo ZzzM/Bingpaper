@@ -515,8 +515,8 @@
 			mainGroup = 98C555D82727AAAC00A2F1D8;
 			packageReferences = (
 				986893BD2806832100455682 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
-				986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
-				986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast.git" */,
+				986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 98C555E22727AAAC00A2F1D8 /* Products */;
 			projectDirPath = "";
@@ -964,7 +964,7 @@
 				version = 1.1.0;
 			};
 		};
-		986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -972,7 +972,7 @@
 				version = 7.2.1;
 			};
 		};
-		986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast.git" */ = {
+		986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
 			requirement = {
@@ -990,12 +990,12 @@
 		};
 		986893C12806833500455682 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = 986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		986893C42806834A00455682 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast.git" */;
+			package = 986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */

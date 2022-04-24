@@ -27,18 +27,18 @@ platform :ios do
 
   lane :setup do
 
-    keychain_name = "#{APP_NAME}-signing"
-    keychain_password = "password"
+    # keychain_name = "#{APP_NAME}-signing"
+    # keychain_password = "password"
 
-    ensure_temp_keychain(keychain_name, keychain_password)
-    install_provisioning_profile(path: ENV["PP_PATH"])
-    install_provisioning_profile(path: ENV["PP_NE_PATH"])
-    import_certificate(
-      certificate_path: ENV["CERTIFICATE_PATH"],
-      certificate_password: ENV["CERTIFICATE_PASSWORD"],
-      keychain_name: keychain_name,
-      keychain_password: keychain_password
-    )
+    # ensure_temp_keychain(keychain_name, keychain_password)
+    # install_provisioning_profile(path: ENV["PP_PATH"])
+    # install_provisioning_profile(path: ENV["PP_NE_PATH"])
+    # import_certificate(
+    #   certificate_path: ENV["CERTIFICATE_PATH"],
+    #   certificate_password: ENV["CERTIFICATE_PASSWORD"],
+    #   keychain_name: keychain_name,
+    #   keychain_password: keychain_password
+    # )
 
 
     version = last_git_tag
@@ -56,6 +56,8 @@ platform :ios do
         plist[:FIR_CLI_API_TOKEN] = ENV["FIR_CLI_API_TOKEN"]
       end
     )
+
+
 
   end
 
@@ -84,6 +86,10 @@ platform :ios do
   end
 
 
+  lane :appcast do
+    clean
+    fir_cli
+  end
 
   lane :test do
 

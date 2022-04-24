@@ -9,10 +9,6 @@ on:
 
 env:
   APP_NAME: Bingpaper
-  CERTIFICATE_DATA: ${{ secrets.CERTIFICATE_DATA }}
-  CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-  ALPHA_PROFILE_DATA: ${{ secrets.ALPHA_PROFILE_DATA }}
-  ALPHA_NE_PROFILE_DATA: ${{ secrets.ALPHA_NE_PROFILE_DATA }}
   FIR_CLI_API_TOKEN: ${{ secrets.FIR_CLI_API_TOKEN }}
   FIR_APP_CHANGELOG: CHANGELOG
 
@@ -26,11 +22,26 @@ jobs:
 
       - name: Setup
         run: |
-          sh scripts/read_mobileprovision.sh
+          fastlane setup
 
-      - name: Package
+      - name: Build
+        uses: yukiarrr/ios-build-action@v1.5.0
+        with:
+          project-path: #{{ env.APP_NAME }}.xcodeproj
+          p12-base64: ${{ secrets.ALPHA_P12_BASE64 }}
+          mobileprovision-base64: |
+            ${{ secrets.ALPHA_PROVISION_BASE64 }}
+            ${{ secrets.ALPHA_EX_PROVISION_BASE64 }}
+          code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
+          team-id: ${{ secrets.TEAM_ID }}
+
+      - name: Changlog
         run: |
-          fastlane package
+          sh scripts/generate_changlog.sh
+
+      - name: Appcast
+        run: |
+          fastlane appcast
           
           
 
