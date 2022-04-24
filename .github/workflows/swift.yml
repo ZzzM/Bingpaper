@@ -28,7 +28,7 @@ jobs:
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
           scheme: ${{ env.APP_NAME }}
-          export_method: "ad-hoc"
+          export-method: "ad-hoc"
           project-path: ${{ env.APP_NAME }}.xcodeproj
           p12-base64: ${{ secrets.ALPHA_P12_BASE64 }}
           mobileprovision-base64: |
