@@ -1,5 +1,6 @@
-platform :ios do
+default_platform(:ios)
 
+platform :ios do
 
   APP_NAME = ENV["APP_NAME"]
 
