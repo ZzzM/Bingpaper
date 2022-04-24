@@ -29,6 +29,7 @@ jobs:
         with:
           scheme: ${{ env.APP_NAME }}
           export-method: "ad-hoc"
+          output-path: ${{ env.APP_NAME }}.ipa
           project-path: ${{ env.APP_NAME }}.xcodeproj
           p12-base64: ${{ secrets.ALPHA_P12_BASE64 }}
           mobileprovision-base64: |
