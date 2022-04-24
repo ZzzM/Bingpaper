@@ -1,45 +1,9 @@
-default_platform(:ios)
-
-def delete_temp_keychain(name)
-  delete_keychain(
-    name: name
-  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
-end
-
-def create_temp_keychain(name, password)
-  create_keychain(
-    name: name,
-    password: password,
-    unlock: false,
-    timeout: 3600
-  )
-end
-
-def ensure_temp_keychain(name, password)
-  delete_temp_keychain(name)
-  create_temp_keychain(name, password)
-end
-
 platform :ios do
 
 
   APP_NAME = ENV["APP_NAME"]
 
   lane :setup do
-
-    # keychain_name = "#{APP_NAME}-signing"
-    # keychain_password = "password"
-
-    # ensure_temp_keychain(keychain_name, keychain_password)
-    # install_provisioning_profile(path: ENV["PP_PATH"])
-    # install_provisioning_profile(path: ENV["PP_NE_PATH"])
-    # import_certificate(
-    #   certificate_path: ENV["CERTIFICATE_PATH"],
-    #   certificate_password: ENV["CERTIFICATE_PASSWORD"],
-    #   keychain_name: keychain_name,
-    #   keychain_password: keychain_password
-    # )
-
 
     version = last_git_tag
     commit = last_git_commit
@@ -57,12 +21,16 @@ platform :ios do
       end
     )
 
-
-
+  end
+  
+  
+  lane :appcast do
+    clean
+    fir_cli
   end
 
 
-  lane :build do
+  private_lane :build do
     build_app(
       clean: true,
       silent: true,
@@ -71,24 +39,8 @@ platform :ios do
     )
   end
 
-  
-  lane :package do
-    
-    setup
-    build
-    clean
-    fir_cli
-    
-  end
-
-  lane :clean do
+  private_lane :clean do
     sh "rm -vfr ~/Library/Developer/Xcode/Archives/*"
-  end
-
-
-  lane :appcast do
-    clean
-    fir_cli
   end
 
   lane :test do
