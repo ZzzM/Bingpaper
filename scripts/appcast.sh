@@ -11,7 +11,7 @@ function clean() {
 }
 
 function upload() {
-    fastlane action fir_cli
+    fastlane run fir_cli
 }
 
 generate_changlog
