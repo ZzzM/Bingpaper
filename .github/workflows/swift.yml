@@ -28,6 +28,7 @@ jobs:
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
           project-path: ${{ env.APP_NAME }}.xcodeproj
+          scheme: ${{ env.APP_NAME }}
           p12-base64: ${{ secrets.ALPHA_P12_BASE64 }}
           mobileprovision-base64: |
             ${{ secrets.ALPHA_PROVISION_BASE64 }}
