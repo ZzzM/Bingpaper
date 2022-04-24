@@ -47,6 +47,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### ios appcast
+
+```sh
+[bundle exec] fastlane ios appcast
+```
+
+
+
 ### ios test
 
 ```sh
