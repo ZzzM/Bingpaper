@@ -14,7 +14,7 @@ env:
 
 jobs:
   Release:
-    runs-on: macOS-12
+    runs-on: macOS-latest
     
     steps:
       - name: Checkout
