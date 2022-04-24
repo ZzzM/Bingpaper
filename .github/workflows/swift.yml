@@ -43,8 +43,7 @@ jobs:
 
       - name: Appcast
         run: |
-          echo $PWD
-          echo ls
+          echo $PWD;ls
           fastlane appcast
           
           
