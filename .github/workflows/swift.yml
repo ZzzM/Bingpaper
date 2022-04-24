@@ -23,7 +23,6 @@ jobs:
       - name: Setup
         run: |
           fastlane setup
-          fastlane appcast
 
       - name: Build
         uses: yukiarrr/ios-build-action@v1.5.0
@@ -41,11 +40,11 @@ jobs:
       - name: Changlog
         run: |
           sh scripts/generate_changlog.sh
-          fastlane appcast
+          echo $PWD;ls
 
-      - name: Appcast
-        run: |
-          fastlane appcast
+#       - name: Appcast
+#         run: |
+#           fastlane appcast
           
           
 
