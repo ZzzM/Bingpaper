@@ -37,13 +37,10 @@ jobs:
           code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
           team-id: ${{ secrets.TEAM_ID }}
 
-      - name: Changlog
-        run: |
-          sh scripts/generate_changlog.sh
-
       - name: Appcast
         run: |
-          fastlane appcast
+          sh scripts/appcast.sh
+
           
           
 
