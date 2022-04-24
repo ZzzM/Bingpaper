@@ -27,7 +27,7 @@ platform :ios do
   
   lane :appcast do
     clean
-    fir_cli
+    # fir_cli
   end
 
 
