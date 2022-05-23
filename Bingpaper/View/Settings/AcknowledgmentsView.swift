@@ -23,11 +23,13 @@ struct LicenseView: View {
     let dependence: (String, URL)
 
     var body: some View {
-        Form {
+        
+        ScrollView {
             ForEach(Dependencies.license(from: dependence.1), id: \.id) {
                 Text($0.footerText)
-            }
+            }.padding()
         }
+        .background(Color.appBackground)
         .barTitle(dependence.0.l10nKey)
     }
 }

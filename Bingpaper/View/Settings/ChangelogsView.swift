@@ -6,7 +6,7 @@
 //
 
 
-import MarkdownUI
+import MarkdownView
 import SwiftUI
 
 struct ChangelogsView: View {
@@ -14,7 +14,7 @@ struct ChangelogsView: View {
     var body: some View {
 
         ScrollView {
-            Markdown(source).padding()
+            MarkdownUI(body: source)
         }
         .background(Color.appBackground)
         .barTitle(L10n.Settings.changelogs)
@@ -22,10 +22,11 @@ struct ChangelogsView: View {
 
     private var source: String {
         do {
+            
             guard let url = Bundle.main.url(forResource: L10n.changlogs, withExtension: "md") else { return "" }
             return try String(contentsOf: url)
         } catch {
-            return ""
+            return "No Changlogs"
         }
     }
 }

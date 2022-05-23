@@ -8,26 +8,28 @@
 import Foundation
 
 
+enum AppInfoKey: String {
+    case build = "CFBundleVersion",
+         version = "CFBundleShortVersionString",
+         identifier = "CFBundleIdentifier",
+         name = "CFBundleName",
+         firToken = "FIR_CLI_API_TOKEN",
+         gitHash = "GIT_HASH",
+         gitDate = "GIT_DATE"
+}
+
 struct AppInfo {
 
-    private enum InfoKey: String {
-        case build = "CFBundleVersion",
-             version = "CFBundleShortVersionString",
-             identifier = "CFBundleIdentifier",
-             name = "CFBundleName",
-             firToken = "FIR_CLI_API_TOKEN",
-             commitHash = "CommitHash",
-             commitDate = "CommitDate"
-
+    private static subscript(key: AppInfoKey) -> String {
+        Bundle.main.infoDictionary?[key.rawValue] as? String ?? "none"
     }
 
-    private static func value(for key: InfoKey) -> String { Bundle.main.infoDictionary?[key.rawValue] as? String ?? "none" }
+    static let name = Self[.name]
+    static let version = Self[.version]
+    static let gitHash = Self[.gitHash]
+    static let gitDate = Self[.gitDate]
 
-    static let name = value(for: .name)
-    static let version = value(for: .version)
-    static let id = value(for: .identifier)
-    static let firToken = value(for: .firToken)
-    static let commitHash = value(for: .commitHash)
-    static let commitDate = value(for: .commitDate)
+    static let id = Self[.identifier]
+    static let firToken = Self[.firToken]
 
 }

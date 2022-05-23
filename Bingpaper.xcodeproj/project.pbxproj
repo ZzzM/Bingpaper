@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98089454282B657900694AD7 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 98089453282B657900694AD7 /* MarkdownView */; };
 		98195C5827338DA2005DAD0E /* MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98195C5727338DA2005DAD0E /* MediumView.swift */; };
 		98195C5F273392F7005DAD0E /* WidgetPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98195C5E273392F7005DAD0E /* WidgetPhotoView.swift */; };
+		981C658C283B73CB00E0101D /* dependencies in Resources */ = {isa = PBXBuildFile; fileRef = 981C658B283B73CB00E0101D /* dependencies */; };
 		982A301A2731323F00DCAA94 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C555FE2727B1D100A2F1D8 /* WidgetKit.framework */; };
 		982A301B2731323F00DCAA94 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C556002727B1D100A2F1D8 /* SwiftUI.framework */; };
 		982A301E2731323F00DCAA94 /* BingpaperWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A301D2731323F00DCAA94 /* BingpaperWidget.swift */; };
@@ -32,13 +34,11 @@
 		984B4622272928D800F48447 /* PaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B4620272928D800F48447 /* PaperViewModel.swift */; };
 		985B406F2797F8CF00DA40CC /* GeneralPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985B406E2797F8CF00DA40CC /* GeneralPicker.swift */; };
 		985B4072279A65B500DA40CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 985B4074279A65B500DA40CC /* InfoPlist.strings */; };
-		986893BF2806832100455682 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 986893BE2806832100455682 /* MarkdownUI */; };
 		986893C22806833500455682 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 986893C12806833500455682 /* Kingfisher */; };
 		986893C52806834A00455682 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 986893C42806834A00455682 /* AlertToast */; };
 		9873715B27434FF100269241 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9873715A27434FF100269241 /* SettingsViewModel.swift */; };
 		9873715C274B2BAD00269241 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C555E82727AAAE00A2F1D8 /* Assets.xcassets */; };
 		98853019281257C700FD98BC /* changelogs in Resources */ = {isa = PBXBuildFile; fileRef = 98853017281257C700FD98BC /* changelogs */; };
-		9885301D281525DE00FD98BC /* dependencies in Resources */ = {isa = PBXBuildFile; fileRef = 9885301C281525DE00FD98BC /* dependencies */; };
 		98876587272FE16900F7F5FC /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98876586272FE16900F7F5FC /* CircleProgressView.swift */; };
 		98876589272FEC2000F7F5FC /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98876588272FEC2000F7F5FC /* PhotoView.swift */; };
 		9887658B2730DEF300F7F5FC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887658A2730DEF300F7F5FC /* Palette.swift */; };
@@ -110,21 +110,12 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98D2476A277D8ED500F2B278 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		98195C5727338DA2005DAD0E /* MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumView.swift; sourceTree = "<group>"; };
 		98195C5E273392F7005DAD0E /* WidgetPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetPhotoView.swift; sourceTree = "<group>"; };
+		981C658B283B73CB00E0101D /* dependencies */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dependencies; sourceTree = SOURCE_ROOT; };
 		982A30192731323F00DCAA94 /* BingpaperWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BingpaperWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		982A301D2731323F00DCAA94 /* BingpaperWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingpaperWidget.swift; sourceTree = "<group>"; };
 		982A301F2731324000DCAA94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,7 +133,6 @@
 		985B4075279A65B600DA40CC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		9873715A27434FF100269241 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		98853017281257C700FD98BC /* changelogs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelogs; sourceTree = SOURCE_ROOT; };
-		9885301C281525DE00FD98BC /* dependencies */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dependencies; sourceTree = SOURCE_ROOT; };
 		98876586272FE16900F7F5FC /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		98876588272FEC2000F7F5FC /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		9887658A2730DEF300F7F5FC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -205,7 +195,7 @@
 			files = (
 				986893C22806833500455682 /* Kingfisher in Frameworks */,
 				986893C52806834A00455682 /* AlertToast in Frameworks */,
-				986893BF2806832100455682 /* MarkdownUI in Frameworks */,
+				98089454282B657900694AD7 /* MarkdownView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +281,7 @@
 		98C555E32727AAAC00A2F1D8 /* Bingpaper */ = {
 			isa = PBXGroup;
 			children = (
-				9885301C281525DE00FD98BC /* dependencies */,
+				981C658B283B73CB00E0101D /* dependencies */,
 				98853017281257C700FD98BC /* changelogs */,
 				98BBDAC1273E8015003F60D2 /* Info.plist */,
 				985B4074279A65B500DA40CC /* InfoPlist.strings */,
@@ -468,7 +458,7 @@
 				98C555DE2727AAAC00A2F1D8 /* Frameworks */,
 				98C555DF2727AAAC00A2F1D8 /* Resources */,
 				98C5561F2727B20500A2F1D8 /* Embed App Extensions */,
-				98D2476A277D8ED500F2B278 /* Embed Frameworks */,
+				9807BB8F283B6A9F00EBFE69 /* Set Git Info */,
 			);
 			buildRules = (
 			);
@@ -477,9 +467,9 @@
 			);
 			name = Bingpaper;
 			packageProductDependencies = (
-				986893BE2806832100455682 /* MarkdownUI */,
 				986893C12806833500455682 /* Kingfisher */,
 				986893C42806834A00455682 /* AlertToast */,
+				98089453282B657900694AD7 /* MarkdownView */,
 			);
 			productName = Bingpaper;
 			productReference = 98C555E12727AAAC00A2F1D8 /* Bingpaper.app */;
@@ -514,9 +504,9 @@
 			);
 			mainGroup = 98C555D82727AAAC00A2F1D8;
 			packageReferences = (
-				986893BD2806832100455682 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				986893C32806834A00455682 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				98089452282B657900694AD7 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 			);
 			productRefGroup = 98C555E22727AAAC00A2F1D8 /* Products */;
 			projectDirPath = "";
@@ -547,13 +537,34 @@
 				98C555F62727AD9200A2F1D8 /* Launch Screen.storyboard in Resources */,
 				98C555EC2727AAAE00A2F1D8 /* Preview Assets.xcassets in Resources */,
 				98853019281257C700FD98BC /* changelogs in Resources */,
-				9885301D281525DE00FD98BC /* dependencies in Resources */,
+				981C658C283B73CB00E0101D /* dependencies in Resources */,
 				98C555E92727AAAE00A2F1D8 /* Assets.xcassets in Resources */,
 				985B4072279A65B500DA40CC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9807BB8F283B6A9F00EBFE69 /* Set Git Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Git Info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/scripts/setup.sh\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		982A30152731323F00DCAA94 /* Sources */ = {
@@ -867,8 +878,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -906,8 +918,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -956,12 +969,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		986893BD2806832100455682 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+		98089452282B657900694AD7 /* XCRemoteSwiftPackageReference "MarkdownView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			repositoryURL = "https://github.com/keitaoouchi/MarkdownView.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.0;
+				version = 1.9.1;
 			};
 		};
 		986893C02806833500455682 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -983,10 +996,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		986893BE2806832100455682 /* MarkdownUI */ = {
+		98089453282B657900694AD7 /* MarkdownView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 986893BD2806832100455682 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
-			productName = MarkdownUI;
+			package = 98089452282B657900694AD7 /* XCRemoteSwiftPackageReference "MarkdownView" */;
+			productName = MarkdownView;
 		};
 		986893C12806833500455682 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

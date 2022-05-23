@@ -25,8 +25,8 @@ Requires **iOS 15.0** or later.
 
 
 ## Changelogs
-- [简体中文](Bingpaper/Changelogs/CHANGELOG_SC.md)
-- [English](Bingpaper/Changelogs/CHANGELOG.md)
+- [简体中文](changelogs/CHANGELOG_SC.md)
+- [English](changelogs/CHANGELOG.md)
 
 
 ## Snapshots
@@ -38,5 +38,5 @@ Requires **iOS 15.0** or later.
 ## Dependencies
 
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
-- [MarkdownUI](https://github.com/gonzalezreal/MarkdownUI)
+- [MarkdownView](https://github.com/keitaoouchi/MarkdownView)
 - [AlertToast](https://github.com/elai950/AlertToast)

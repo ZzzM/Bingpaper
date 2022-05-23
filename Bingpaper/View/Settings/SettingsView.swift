@@ -135,27 +135,20 @@ struct VersionView: View {
         Section(content: {}, footer: {
             HStack {
                 Spacer()
-                VStack {
-                    Text("Version  \(AppInfo.version) ( \(AppInfo.commitHash) )").foregroundColor(.secondary)
-                    if !version.isLatest {
-                        Button {
-                            isPresented.toggle()
-                        } label: {
-                            Text(L10n.Settings.newVersion)
-                                .font(.caption2)
-                                .foregroundColor(.white)
-                                .padding(6)
-                                .background(Color.accentColor)
-                                .clipShape(Capsule())
-                                
-                        }
-                    } else {
-                        Text(AppInfo.commitDate)
+                Text("Version  \(AppInfo.version) ( \(AppInfo.gitHash) )").foregroundColor(.secondary)
+                if !version.isLatest {
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Text(L10n.Settings.newVersion)
                             .font(.caption2)
-                            .foregroundColor(.secondary)
-                            .padding(6)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 3)
+                            .foregroundColor(.white)
+                            .background(Color.accentColor)
+                            .clipShape(Capsule())
                     }
-                }
+                } 
                 Spacer()
             }
         })

@@ -8,6 +8,7 @@
 import SwiftUI
 import WidgetKit
 
+
 @main
 struct BingpaperApp: App {
 
@@ -23,7 +24,7 @@ struct BingpaperApp: App {
                                          transitionMaskImage: UIImage.backward)
         bar.standardAppearance = appearance
         bar.scrollEdgeAppearance = appearance
-      
+        
     }
 
 

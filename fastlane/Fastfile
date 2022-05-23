@@ -7,8 +7,6 @@ platform :ios do
   lane :setup do
 
     version = last_git_tag
-    commit = last_git_commit
-    date = Time.now.utc.localtime("+08:00").strftime("%Y.%m.%d %k:%M")  
 
     increment_version_number_in_xcodeproj(version_number: version, scheme: APP_NAME)
     increment_build_number_in_xcodeproj(build_number: version, scheme: APP_NAME)
@@ -16,8 +14,6 @@ platform :ios do
     update_info_plist( 
       plist_path: "#{APP_NAME}/Info.plist",
       block: proc do |plist|
-        plist[:CommitHash] = commit[:abbreviated_commit_hash]
-        plist[:CommitDate] = date
         plist[:FIR_CLI_API_TOKEN] = ENV["FIR_CLI_API_TOKEN"]
       end
     )
@@ -31,26 +27,6 @@ platform :ios do
       silent: true,
       scheme: APP_NAME,
       export_method: 'ad-hoc'
-    )
-  end
-
-
-
-  lane :test do
-
-    version = last_git_tag
-    commit = last_git_commit
-    date = Time.now.utc.localtime("+08:00").strftime("%Y.%m.%d %k:%M")  
-
-    increment_version_number_in_xcodeproj(version_number: version)
-    increment_build_number_in_xcodeproj(build_number: version)
-
-    update_info_plist( 
-      plist_path: "Bingpaper/Info.plist",
-      block: proc do |plist|
-        plist[:CommitHash] = "x"
-        plist[:CommitDate] = date
-      end
     )
   end
 
