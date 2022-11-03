@@ -11,56 +11,72 @@ struct MediumView: View {
 
     let entry: Entry
 
-    private let foregroundColor = Preference.shared.palette.color
-
+    var foregroundColor: Color {
+        entry.color ?? .red
+    }
+    
     var body: some View {
 
-        HStack {
+        HStack(spacing: .zero) {
 
-            GeometryReader { p in
-                WidgetPhotoView(image: entry.image, isValid: entry.isValid, width: p.size.height, height: p.size.height)
-            }
-            .widgetURL(entry.widgetURL)
+            WallpaperView(image: entry.image, url: entry.url)
 
-            Spacer()
-
-            CalendarView(header: header, weekView: weekView, dayView: dayView)
-
+            CalendarView(date: entry.date,
+                         header: header,
+                         weekView: weekView,
+                         dayView: dayView).padding()
         }
-        .padding()
-        .background(Color.cellBackground)
+        .frame(maxHeight: .infinity)
+        .background(Color.appBackground)
 
     }
 
     private func header() -> some View {
-        Text(L10n.month())
-            .foregroundColor(foregroundColor)
-            .fontWith(.caption, weight: .regular)
-            .padding(.bottom, 3)
+        EmptyView()
     }
 
     private func weekView(date: Date) -> some View {
         Text(L10n.veryShortWeekday(from: date))
             .foregroundColor(date.inWeekend ? .secondary : .primary)
-            .fontWith(.caption2)
+            .font(.caption)
     }
 
 
     private func dayView(inSameMonth: Bool, date: Date) -> some View {
-        ZStack {
-            if date.inToday {
-                Rectangle()
-                    .foregroundColor(foregroundColor)
-                    .frame(minWidth: 16, maxWidth: 18, minHeight: 16, maxHeight: 18)
-                    .cornerRadius(3)
+
+        let inToday = date.inToday, inWeekend = date.inWeekend
+
+        let color: Color = inToday ? .white : inWeekend ? .secondary:.primary
+
+        return Text(date.day.description)
+            .font(.caption)
+            .foregroundColor(inSameMonth ? color: .minor)
+            .frame(width: 19, height: 19)
+            .background {
+                if inToday {
+                    Circle()
+                        .fill(foregroundColor)
+                }
             }
 
-            Text(date.day.description)
-                .fontWith(.caption2)
-                .foregroundColor(date.inToday ? .white:
-                                    date.inWeekend ? .secondary:.primary)
-        }
-        .opacity(inSameMonth ? 1:0.2)
     }
 
 }
+
+struct WallpaperView: View {
+
+    let image: UIImage?, url: URL?
+
+    var body: some View {
+        if image != .none, url != .none {
+            Link(destination: url!) {
+                Image(uiImage: image!).resizable()
+            }
+        } else {
+            Image.photo.font(.largeTitle)
+                .frame(maxWidth: .infinity)
+        }
+    }
+
+}
+

@@ -1,3 +1,17 @@
+## 1.0.6 - 2022-11-03
+
+### Changed
+- Main UI, Settings UI
+- Widget UI
+
+### Fixed
+- Adaptation to iOS 16
+
+### Removed
+- MarkdownView
+
+---
+
 ## 1.0.5 - 2022-05-23
 
 ### Changed

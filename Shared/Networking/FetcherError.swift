@@ -9,9 +9,9 @@ enum FetcherError: Error, LocalizedError {
         switch self {
         case .url: return L10n.Error.url
         case .http(let code):
-            return L10n.Error.http != nil ? L10n.Error.http! + "\(code)" : .none
+            return L10n.Error.http != .none ? L10n.Error.http! + "\(code)" : .none
         case .server(let result):
-            return L10n.Error.server != nil ? L10n.Error.server! + result : .none
+            return L10n.Error.server != .none ? L10n.Error.server! + result : .none
         }
     }
     

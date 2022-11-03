@@ -13,11 +13,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>FIR_CLI_API_TOKEN</key>
+	<string>FIR_CLI_API_TOKEN</string>
 	<key>GIT_DATE</key>
 	<string></string>
 	<key>GIT_HASH</key>
 	<string></string>
-	<key>FIR_CLI_API_TOKEN</key>
-	<string>FIR_CLI_API_TOKEN</string>
 </dict>
 </plist>

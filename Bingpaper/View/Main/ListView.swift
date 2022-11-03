@@ -7,86 +7,36 @@
 
 import SwiftUI
 
-struct ListView: View {
-
-    let images: [Paper], onTapGesture: (Paper) -> Void
-
-    var body: some View {
-        ForEach(images[1...].indices, id: \.self) { index in
-            
-            let paper =  images[index]
-
-            ListItem(paper: paper)
-                .onTapGesture {
-                    onTapGesture(paper)
-                }
-
-        }
-    }
-}
-
-
-struct ListViewPlaceholder: View {
-
-    var body: some View {
-        ForEach(0 ..< 6) { i in
-            ListItem(paper: .none)
-        }
-    }
-
-}
-
 struct ListItem: View {
 
-    let paper: Paper?
-
-    private var thumbnailUrl: String {
-        paper != nil ? paper!.thumbnailUrl : ""
-    }
-
-    private var title: String {
-        paper != nil ? paper!.title : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    }
-
-    private var ps: String {
-        paper != nil ? paper!.ps : "xxxxxxxxxxxx"
-    }
-
-    private var reason: RedactionReasons {
-        paper != nil ? [] : .placeholder
-    }
+    let picture: Picture, onTapGesture: (URL?) -> Void
 
     var body: some View {
+
         HStack {
 
-            if thumbnailUrl.isEmpty {
-                PhotoPlaceholder(size: 40, width: 150, height: 150)
-            } else {
-                PhotoView(thumbnailUrl, width: 150, height: 150) { _ in
-                    PhotoPlaceholder(size: 40, width: 150, height: 150)
-                }
-                .disabled(true)
+            PhotoView(picture.size200, width: 100) {
+                CircleProgressView(completed: $0)
             }
 
+            VStack(alignment: .leading) {
+                Text(picture.title)
+                    .font(.subheadline)
 
-            GeometryReader { poxy in
-                VStack {
-                    Text(title)
-                        .font(.subheadline)
-                        .frame(width: poxy.size.width, alignment: .trailing)
-                        .lineLimit(3)
-                    Spacer()
-                    Text(ps)
-                        .font(.caption2)
-                        .frame(width: poxy.size.width, alignment: .trailing)
-                        .lineLimit(1)
-                }
+                Spacer()
+
+                Text(picture.provider)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-            .redacted(reason: reason)
 
         }
         .background(Color.cellBackground)
         .cornerRadius(10)
+        .onTapGesture {
+            onTapGesture(picture.url)
+        }
     }
 }

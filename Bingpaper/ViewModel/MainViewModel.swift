@@ -1,33 +1,36 @@
 import SwiftUI
 
 
-
 class MainViewModel: StateViewModel {
 
     @Published
     var date = Date()
 
     @Published
-    var paper: Paper?
+    var url: URL?
 
     @Published
     var showToast = false
 
     var toast = Toast.deafult
 
-    var images: [Paper] = []
+    var pictures: [Picture] = []
 
     var isFinished: Bool {
-        state != .onLoading && !images.isEmpty
+        state != .onLoading && !isEmpty
+    }
+
+    var isBusy: Bool {
+        state == .onLoading || state == .onRefresh
     }
 
     private var isEmpty: Bool {
-        images.isEmpty
+        pictures.isEmpty
     }
 
-    func present(_ paper: Paper) {
-        guard self.paper?.title != paper.title else { return }
-        self.paper = paper
+    func present(_ url: URL?) {
+        guard url != self.url else { return }
+        self.url = url
     }
 
     @MainActor
@@ -53,7 +56,7 @@ class MainViewModel: StateViewModel {
         Task {
             do {
                 state = .onLoading
-                images = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
+                pictures = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
                 state = isEmpty ? .loadError(L10n.Error.empty):.loadComplete
             } catch {
                 state = .loadError(error.localizedDescription.l10nKey)
@@ -70,7 +73,7 @@ class MainViewModel: StateViewModel {
             }
             do {
                 state = .onRefresh
-                images = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
+                pictures = try await Fetcher.fetchWeek(mkt: L10n.mkt).get()
                 state = .refreshCompleted
                 toast = Toast(type: .success, title: L10n.Toast.refreshCompleted)
             } catch {

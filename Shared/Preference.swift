@@ -10,12 +10,18 @@ class Preference: ObservableObject {
 
     static let shared = Preference()
 
-    @AppStorage(AppStorageKey.theme, store: UserDefaults.default)
+    @AppStorage(AppStorageKey.theme)
     var theme: Theme = .system
 
-    @AppStorage(AppStorageKey.palette, store: UserDefaults.default)
-    var palette: Palette = .red
-
-    @AppStorage(AppStorageKey.language, store: UserDefaults.default)
+    @AppStorage(AppStorageKey.language)
     var language: Language = .system
+
+    @AppStorage(AppStorageKey.isGrid)
+    var isGrid = false
+}
+
+extension Preference {
+    var colorScheme: ColorScheme? { theme.colorScheme }
+    var locale: Locale { language.locale }
+    var columns: [GridItem] { Array(repeating: GridItem(), count: isGrid ? 2:1) }
 }

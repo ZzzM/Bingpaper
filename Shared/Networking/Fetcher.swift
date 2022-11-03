@@ -11,9 +11,9 @@ struct Fetcher {
 
     private static let shared = Fetcher()
 
-    static func fetchWeek(size: String = "7", mkt: String) async -> Result<[Paper], Error> {
+    static func fetchWeek(size: String = "7", mkt: String) async -> Result<[Picture], Error> {
         do {
-            let reulst: Result<Papers, Error> = await shared.request(.fetchPapers(size, mkt))
+            let reulst: Result<Wallpaper, Error> = await shared.request(.fetchPapers(size, mkt))
             let images = try reulst.get().images
             return .success(images)
         } catch {
@@ -21,14 +21,14 @@ struct Fetcher {
         }
     }
 
-    static func fetchToday(mkt: String) async -> Result<Paper, Error> {
+    static func fetchToday(mkt: String) async -> Result<Picture, Error> {
         do {
             let images = try await fetchWeek(size: "1", mkt: mkt).get()
             if images.isEmpty {
                 return .failure(FetcherError.url)
             }
-            let paper = images[0]
-            return .success(paper)
+            let picture = images.first!
+            return .success(picture)
         } catch  {
             return .failure(error)
         }
@@ -75,6 +75,7 @@ extension Fetcher {
 
         do {
             let (data, response) = try await URLSession.shared.data(from: _url)
+
             guard let response = response as? HTTPURLResponse else {
                 return .failure(FetcherError.url)
             }

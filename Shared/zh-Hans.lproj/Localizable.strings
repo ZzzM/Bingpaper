@@ -16,7 +16,7 @@
 "settings.palette" = "调色";
 "settings.language" = "语言";
 "settings.permission" = "权限";
-"settings.cache" = "数据缓存";
+"settings.clear" = "清理数据缓存";
 "settings.changelogs" = "更新日志";
 "settings.licenses" = "开源许可";
 "settings.newVersion" = "新版本可用";

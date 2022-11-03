@@ -11,9 +11,6 @@ import CoreGraphics
 class SettingsViewModel: StateViewModel {
 
     @Published
-    var version = Version()
-
-    @Published
     var cacheSize: Double = 0
 
 
@@ -24,7 +21,7 @@ class SettingsViewModel: StateViewModel {
         }
     }
 
-    @MainActor
+
     func cacheClear() {
         Task{
             await Cache.clear()
@@ -32,10 +29,4 @@ class SettingsViewModel: StateViewModel {
         }
     }
 
-    @MainActor
-    func checkForUpdate() {
-        Task {
-            version = await Fetcher.checkForUpdate()
-        }
-    }
 }

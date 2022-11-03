@@ -13,11 +13,13 @@ struct ToastViewModifier: ViewModifier {
     @Binding
     var isPresenting: Bool
 
-    let type: ToastType, title: String
+    let type: ToastType, title: String?
 
     func body(content: Content) -> some View {
         content.toast(isPresenting: $isPresenting) {
-            AlertToast(displayMode: .hud, type: .systemImage(type.imageName, type.imageColor), title: title)
+            AlertToast(displayMode: .hud,
+                       type: type.systemImage,
+                       title: title)
         }
     }
 
@@ -27,7 +29,9 @@ enum ToastType {
 
     case failure, warning, success
 
-    var imageColor: Color {
+    var systemImage: AlertToast.AlertType { .systemImage(imageName, imageColor) }
+
+    private var imageColor: Color {
         switch self {
         case .success: return .green
         case .warning: return .yellow
@@ -35,7 +39,7 @@ enum ToastType {
         }
     }
 
-    var imageName: String {
+    private var imageName: String {
         switch self {
         case .success: return "checkmark.circle.fill"
         case .warning: return "exclamationmark.circle.fill"
@@ -46,8 +50,8 @@ enum ToastType {
 }
 
 struct Toast {
-    let type: ToastType, title: String
-    static let `deafult`: Toast = .init(type: .success, title: "")
+    let type: ToastType, title: String?
+    static let `deafult`: Toast = .init(type: .success, title: .none)
 }
 
 extension View {

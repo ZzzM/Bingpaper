@@ -9,7 +9,7 @@ import Foundation
 
 
 enum Host {
-    static let bing = "https://www.bing.com"
+    static let bing = "https://cn.bing.com"
     static let fir = "https://api.bq04.com"
 }
 

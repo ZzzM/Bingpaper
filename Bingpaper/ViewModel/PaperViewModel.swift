@@ -33,9 +33,9 @@ class PaperViewModel: StateViewModel {
         state = .loadError(error.localizedDescription.l10nKey)
     }
 
-    func onSuccess(_ cpImage: UIImage) {
+    func onSuccess(_ uiImage: UIImage) {
         withAnimation {
-            image = cpImage
+            image = uiImage
             state = .loadComplete
         }
     }

@@ -18,12 +18,10 @@
 "settings.palette" = "Palette";
 "settings.language" = "Language";
 "settings.permission" = "Permission";
-"settings.cache" = "Data cache";
+"settings.clear" = "Clear data cache";
 "settings.changelogs" = "Changelogs";
 "settings.licenses" = "Open source licenses";
 "settings.newVersion" = "New version available";
-
-
 
 
 "theme.system" = "Follow system";
@@ -40,7 +38,7 @@
 "alert.ok" = "OK";
 "alert.cancel" = "Cancel";
 "alert.confirm.permission" = "Confirm to modify the permission?";
-"alert.request.permission" = "Enable photo write permission?";
+"alert.request.permission" = "Enable photo write access?";
 "alert.install" = "Install Updates?";
 "alert.clear" = "Clear Cache?";
 

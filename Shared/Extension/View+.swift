@@ -6,13 +6,6 @@
 //
 import SwiftUI
 
-extension Text {
-    func fontWith(_ style: Font.TextStyle, weight: Font.Weight = .light) -> Text {
-        font(.system(style, design: .rounded))
-            .fontWeight(weight)
-    }
-}
-
 extension View {
 
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
@@ -23,10 +16,11 @@ extension View {
         navigationTitle("")
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(title).fontWith(.title2)
+                    Text(title).font(.title2)
                 }
             }
     }
+
 }
 
 @available(iOSApplicationExtension, unavailable)
@@ -48,10 +42,7 @@ extension View {
               isPresented: Binding<Bool>) -> some View {
 
         showAlert(titleKey, message: message, isPresented: isPresented) {
-            guard let url = URL(string: urlString) else {
-                return
-            }
-            url.open()
+            urlString.open()
         }
     }
 }

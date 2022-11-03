@@ -12,29 +12,44 @@ struct SettingsView: View {
     @StateObject
     private var viewModel = SettingsViewModel()
 
+    @State
+    private var isShown = false
+
     init() {
         UITableView.appearance().backgroundColor = UIColor(.appBackground)
     }
 
     var body: some View {
-        Form {
-            Group {
-                GeneralSection()
-                PermissionSection()
-                CacheRow(size: viewModel.cacheSize) { viewModel.cacheClear() }
-                AboutSection()
-            }
-            .textCase(.none)
-            .listRowBackground(Color.cellBackground)
 
-            VersionView(version: viewModel.version)
+        Form {
+            GeneralSection()
+            AboutSection()
+
+            SettingsFooter()
+
 
         }
         .onAppear(perform: {
             viewModel.cacheCalculate()
-            viewModel.checkForUpdate()
         })
         .barTitle(L10n.Settings.title)
+        .toolbar {
+
+            ToolbarItem(placement: .primaryAction) {
+                if viewModel.cacheSize > 0 {
+                    Button {
+                        isShown.toggle()
+                    } label: {
+                        Image.clear
+                    }
+                    .showAlert(L10n.Alert.clear,
+                               message: String(format: "%.2g M", viewModel.cacheSize),
+                               isPresented: $isShown,
+                               action: viewModel.cacheClear)
+                }
+            }
+        }
+
 
     }
 
@@ -49,11 +64,11 @@ struct GeneralSection: View {
     var body: some View {
 
         Section {
-            GeneralPicker(title: L10n.Settings.language,
-                          items: Language.allCases,
-                          selection: $pref.language) {
-                Text($0.title)
-            }
+            //            GeneralPicker(title: L10n.Settings.language,
+            //                          items: Language.allCases,
+            //                          selection: $pref.language) {
+            //                Text($0.title)
+            //            }
 
             GeneralPicker(title: L10n.Settings.theme,
                           items: Theme.allCases,
@@ -61,104 +76,45 @@ struct GeneralSection: View {
                 Text($0.title)
             }
 
-            GeneralPicker(title: L10n.Settings.palette,
-                          items: Palette.allCases,
-                          selection: $pref.palette) {
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor($0.color)
-
+            SettingsRow(title: L10n.Settings.language, action: {
+                UIApplication.openSettingsURLString.open()
+            }) {
+                EmptyView()
             }
+
+
         }
 
-    }
-}
-
-struct PermissionSection: View {
-
-    @State
-    private var isPresented = false
-
-    var body: some View {
-        if PhotoLibrary.isDeterminedForAddOnly {
-            Section {
-                Toggle(L10n.Permission.addPhotos, isOn: .constant(PhotoLibrary.isAuthorizedForAddOnly))
-                    .toggleStyle(CheckboxStyle(active: false))
-                    .onTapGesture {
-                        isPresented.toggle()
-                    }
-            }
-            .open(L10n.Alert.confirmPermission, isPresented: $isPresented)
-        }
     }
 }
 
 struct AboutSection: View {
     var body: some View {
         Section {
-            NavigationLink.init(L10n.Settings.changelogs, destination: ChangelogsView.init)
+
+            Link(destination: URL(string: L10n.changlogs) ?? .gitHub) {
+                HStack {
+                    Text(L10n.Settings.changelogs).foregroundColor(.primary)
+                    NavigationLink {} label: {}
+                }
+            }
             NavigationLink.init(L10n.Settings.licenses, destination: LicensesView.init)
         }
     }
 }
 
-struct CacheRow: View {
+struct SettingsFooter: View {
 
-    let size: Double, action: VoidClosure
-
-    @State
-    private var isPresented = false
+    let version = "\(AppInfo.version) ( \(AppInfo.gitHash) )"
 
     var body: some View {
-        SettingsRow(title: L10n.Settings.cache) {
-            isPresented.toggle()
-        } label: {
-            Text(String(format: "%.2g M", size))
+        Section {} footer: {
+            Text(version)
+                .font(.footnote)
                 .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
-        .disabled(size <= 0)
-        .showAlert(L10n.Alert.clear, isPresented: $isPresented, action: action)
     }
-
-}
-
-
-struct VersionView: View {
-
-    @State
-    private var isPresented = false
-
-    let version: Version
-
-    var body: some View {
-
-        Section(content: {}, footer: {
-            HStack {
-                Spacer()
-                Text("Version  \(AppInfo.version) ( \(AppInfo.gitHash) )").foregroundColor(.secondary)
-                if !version.isLatest {
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Text(L10n.Settings.newVersion)
-                            .font(.caption2)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 3)
-                            .foregroundColor(.white)
-                            .background(Color.accentColor)
-                            .clipShape(Capsule())
-                    }
-                } 
-                Spacer()
-            }
-        })
-        .open(L10n.Alert.install,
-              message: version.changelog,
-              urlString: version.installUrl,
-              isPresented: $isPresented)
-
-    }
-
 }
 
 struct SettingsRow<Label: View>: View {
@@ -173,7 +129,7 @@ struct SettingsRow<Label: View>: View {
                 Text(title).foregroundColor(.primary)
                 ZStack(alignment: .trailing) {
                     label().padding(.horizontal)
-                    NavigationLink(destination: {}, label: {})
+                    NavigationLink {} label: {}
                 }
             }
         }

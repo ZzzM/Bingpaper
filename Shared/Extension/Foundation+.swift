@@ -19,7 +19,13 @@ extension Date {
     }
 
     var month: Int {
-        Calendar.gregorian.component(.month, from: self)
+        get {
+            return Calendar.gregorian.component(.month, from: self)
+        }
+        set {
+            guard newValue > 0 else { return }
+            added(component: .month, value: newValue - month)
+        }
     }
 
 
@@ -47,6 +53,12 @@ extension Date {
 
     func inSameMonth(as date: Date) -> Bool {
         Calendar.gregorian.isDate(self, equalTo: date, toGranularity: .month)
+    }
+
+    private mutating func added(_ calendar: Calendar = .gregorian, component: Calendar.Component, value: Int) {
+        if let date = calendar.date(byAdding: component, value: value, to: self) {
+            self = date
+        }
     }
 
 }
@@ -108,6 +120,14 @@ extension String {
         removingPercentEncoding ?? self
     }
 
+    @available(iOSApplicationExtension, unavailable)
+    func open() {
+        guard let url = URL(string: self) else {
+            return
+        }
+        url.open()
+    }
+
 }
 
 extension URLComponents {
@@ -115,22 +135,30 @@ extension URLComponents {
         queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
     }
 
-    var parameters: [String: String] {
-        guard queryItems != nil else { return [:] }
-        var _parameters: [String: String] = [:]
-        for item in queryItems! {
-            _parameters[item.name] = item.value
-        }
-        return _parameters
+    subscript(key: String) -> String? {
+        guard queryItems != .none else { return .none }
+        return queryItems!.first(where: { $0.name == key })?.value
     }
 }
 
 
+extension URL: Identifiable {
+    public var id: String { absoluteString }
+}
 
 @available(iOSApplicationExtension, unavailable)
 extension URL {
+
+
     func open() {
         guard UIApplication.shared.canOpenURL(self) else { return }
         UIApplication.shared.open(self, options:[:], completionHandler: .none)
     }
+
+    subscript(key: String) -> String? {
+        guard let components = URLComponents(string: self.absoluteString) else { return nil }
+        return components[key]
+    }
 }
+
+

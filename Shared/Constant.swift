@@ -19,6 +19,7 @@ enum AppStorageKey {
     static let theme = "AppStorageKey.theme"
     static let palette = "AppStorageKey.palette"
     static let language = "AppStorageKey.language"
+    static let isGrid = "AppStorageKey.isGrid"
 }
 
 extension Calendar {
@@ -58,31 +59,30 @@ extension URL {
     static let gitHub = URL(string: "https://github.com/ZzzM/Bingpaper")!
 }
 
-
-extension UIImage {
-    static let backward = UIImage(systemName: "arrow.backward")
-}
-
 extension Image {
     static let settings = Image(systemName: "gearshape.fill")
+    static let clear = Image(systemName: "trash.fill")
+    static let refresh = Image(systemName: "arrow.clockwise")
+    static let grid = Image(systemName: "square.grid.2x2.fill")
+    static let list = Image(systemName: "square.fill.text.grid.1x2")
     static let warning = Image(systemName: "exclamationmark.circle.fill")
     static let failure = Image(systemName: "xmark.circle.fill")
     static let success = Image(systemName: "checkmark.circle.fill")
     static let download = Image(systemName: "arrow.down")
     static let close = Image(systemName: "xmark")
-    static let appLogo = Image.init("AppLogo", bundle: .main)
+    static let photo = Image(systemName: "photo")
+    static let appLogo = Image("AppLogo", bundle: .main)
 }
 
 extension Color {
     static let appBackground = Color("AppBackground")
     static let cellBackground = Color("CellBackground")
+    static let minor = Color.secondary.opacity(0.3)
 }
 
 extension Font {
     static let `default` = Font.system(size: 16, weight: .light, design: .rounded)
 }
-
-
 
 
 extension Array where Element == GridItem {

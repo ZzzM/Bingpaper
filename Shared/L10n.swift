@@ -9,7 +9,7 @@ import SwiftUI
 
 struct L10n {
 
-    private static var locale: Locale { Preference.shared.language.locale }
+    private static var locale: Locale { Preference.shared.locale }
 
     private static var inChinese: Bool { locale.identifier.contains("zh") }
 
@@ -22,7 +22,7 @@ struct L10n {
         static let theme = "settings.theme".l10nKey
         static let palette = "settings.palette".l10nKey
         static let language = "settings.language".l10nKey
-        static let cache = "settings.cache".l10nKey
+        static let clear = "settings.clear".l10nKey
         static let permission = "settings.permission".l10nKey
         static let changelogs = "settings.changelogs".l10nKey
         static let licenses = "settings.licenses".l10nKey
@@ -73,7 +73,7 @@ struct L10n {
 extension L10n {
     static var languageCode: String? { locale.languageCode }
     static var mkt: String { inChinese ? "zh-CN":"en-US" }
-    static var changlogs: String { "changelogs/" + (inChinese ? "CHANGELOG_SC":"CHANGELOG") }
+    static var changlogs: String { "https://github.com/ZzzM/Bingpaper/blob/master/changelogs/" + (inChinese ? "CHANGELOG_SC":"CHANGELOG") + ".md" }
 }
 
 extension L10n {

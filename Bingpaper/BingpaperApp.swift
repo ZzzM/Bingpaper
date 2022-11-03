@@ -15,43 +15,23 @@ struct BingpaperApp: App {
     @StateObject
     private var pref = Preference.shared
 
-    init() {
-        let bar = UINavigationBar.appearance()
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .systemBackground
-        appearance.setBackIndicatorImage(UIImage.backward,
-                                         transitionMaskImage: UIImage.backward)
-        bar.standardAppearance = appearance
-        bar.scrollEdgeAppearance = appearance
-        
-    }
-
-
     var body: some Scene {
         WindowGroup {
+            
             MainView()
                 .environmentObject(pref)
                 .environment(\.font, .default)
-                .environment(\.locale, pref.language.locale)
-                .tint(pref.palette.color)
-                .accentColor(pref.palette.color)
-                .preferredColorScheme(pref.theme.colorScheme)
-                .onChange(of: pref.palette, perform: reloadTimelines)
-                .onChange(of: pref.theme, perform: reloadTimelines)
-                .onChange(of: pref.language, perform: reloadTimelines)
+                .tint(.primary)
+                .accentColor(.primary)
+                .preferredColorScheme(pref.colorScheme)
                 .onOpenURL(perform: onOpenURL)
-                
-        }
-    }
 
-    func reloadTimelines<V: Equatable>(_ newValue: V) {
-        WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 
     func onOpenURL(_ url: URL) {
         guard url.scheme == URLScheme.default else { return }
-        NotificationCenter.default.post(name: .sceneWillPresent, object: Paper(widgetURL: url))
+        NotificationCenter.default.post(name: .sceneWillPresent, object: url)
     }
 }
 

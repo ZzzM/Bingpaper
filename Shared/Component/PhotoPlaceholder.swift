@@ -22,12 +22,12 @@ struct PhotoPlaceholder: View {
     var body: some View {
 
         Rectangle()
-            .fill(.black.opacity(0.2))
+            .fill()
             .frame(width: width, height: height)
             .overlay {
                 Image(systemName: name)
                     .font(.system(size: size))
-                    .foregroundColor(.secondary.opacity(0.3))
+                    .foregroundColor(.minor)
             }
     }
 }

@@ -16,7 +16,6 @@ A practical iOS Bing wallpaper App
 ## Features
 - [x] Widgets
 - [x] Switch to Dark & Light Modes Manually
-- [x] App and widget color matching synchronization
 - [x] App and widget localization (简体中文、English)
 - [x] SwiftUI / Async / Await
 
@@ -31,12 +30,14 @@ Requires **iOS 15.0** or later.
 
 ## Snapshots
 
-<img src="assets/l01.png" width="200px"><img src="assets/l02.png" width="200px"><img src="assets/d01.png" width="200px"><img src="assets/d02.png" width="200px">
+<img src="assets/ml01.png" width="200px"><img src="assets/md01.png" width="200px"><img src="assets/ml02.png" width="200px"><img src="assets/md02.png" width="200px">
 
-<img src="assets/p01.png" width="200px"><img src="assets/p02.png" width="200px"><img src="assets/w01.png" width="200px"><img src="assets/w02.png" width="200px">
+<img src="assets/p01.png" width="200px"><img src="assets/p02.png" width="200px"><img src="assets/ml03.png" width="200px"><img src="assets/md03.png" width="200px">
+
+<img src="assets/wl01.png" width="200px"><img src="assets/wd01.png" width="200px">
 
 ## Dependencies
 
-- [Kingfisher](https://github.com/onevcat/Kingfisher)
-- [MarkdownView](https://github.com/keitaoouchi/MarkdownView)
 - [AlertToast](https://github.com/elai950/AlertToast)
+- [Kingfisher](https://github.com/onevcat/Kingfisher)
+

@@ -6,7 +6,6 @@
 //
 
 import WidgetKit
-import SwiftUI
 
 struct Provider: TimelineProvider {
 
@@ -22,7 +21,7 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
 
         Task {
-            let timeline = await WidgetFetcher.fetchPaper(mkt: L10n.mkt)
+            let timeline = await WidgetFetcher.fetchToday(mkt: L10n.mkt)
             completion(timeline)
         }
 

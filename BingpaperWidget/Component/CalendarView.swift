@@ -31,7 +31,7 @@ struct CalendarView<Day: View, Header: View, Week: View>: View {
     var body: some View {
 
         let days = makeDays()
-        let spacing: CGFloat = days.count > MinDates ? 2: 4
+        let spacing: CGFloat = days.count > MinDates ? 1: 3
 
         LazyVGrid(columns: columns, spacing: spacing) {
             Section(content: {

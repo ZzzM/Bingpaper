@@ -16,13 +16,11 @@ struct PhotoView<Content: View>: View {
     let onFailure: FailureClosure?
     let onSuccess: ((UIImage) -> Void)?
     let onProgress: ((CGFloat) -> Content)?
-    let onTapGesture: VoidClosure?
 
     init(_ urlString: String, width: CGFloat? = .none, height: CGFloat? = .none,
          onProgress: ((CGFloat) -> Content)? = .none,
          onFailure: FailureClosure? = .none,
-         onSuccess: ((UIImage) -> Void)? = .none,
-         onTapGesture: VoidClosure? = .none) {
+         onSuccess: ((UIImage) -> Void)? = .none) {
         
         self.urlString = urlString
         self.width = width
@@ -30,10 +28,10 @@ struct PhotoView<Content: View>: View {
         self.onFailure = onFailure
         self.onSuccess = onSuccess
         self.onProgress = onProgress
-        self.onTapGesture = onTapGesture
     }
 
     var body: some View {
+        
         KFImage(URL(string: urlString))
             .resizable()
             .onFailure(onFailure)
@@ -48,9 +46,6 @@ struct PhotoView<Content: View>: View {
             .scaledToFill()
             .frame(width: width, height: height)
             .ignoresSafeArea()
-            .onTapGesture {
-                onTapGesture?()
-            }
     }
 
 }
