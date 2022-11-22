@@ -11,7 +11,7 @@ Bingpaper</br>
 </a>
 </h1>
 
-A practical iOS Bing wallpaper App 
+A practical iOS Bing wallpaper app
 
 ## Features
 - [x] Widgets
